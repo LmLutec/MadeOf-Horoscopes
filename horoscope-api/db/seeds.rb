@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+sign = Horoscope.create(name: 'Sagittarius', start_date: 11/29/20, end_date: 11/30/20, house: '9', planet: 'jupiter', element: 'element', quality: 'quality', polarity: 'polarity' )
+
+
