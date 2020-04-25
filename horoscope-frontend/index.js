@@ -9,5 +9,13 @@ fetch(HOROSCOPES_URL)
         return response.json();
     })
     .then(function(json){
-        console.log(json)
+        
+        json.forEach(element => {
+            let pag = document.createElement("LI") 
+            pag.innerHTML = element.name    
+            document.body.appendChild(pag)
+        });
+        
       })
+
+      
