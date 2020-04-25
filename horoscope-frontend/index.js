@@ -11,9 +11,9 @@ fetch(HOROSCOPES_URL)
     .then(function(json){
         
         json.forEach(element => {
-            let pag = document.createElement("LI") 
-            pag.innerHTML = element.name    
-            document.body.appendChild(pag)
+            let sign = document.createElement("LI") 
+            sign.innerHTML = element.name    
+            document.body.appendChild(sign)
         });
         
       })
