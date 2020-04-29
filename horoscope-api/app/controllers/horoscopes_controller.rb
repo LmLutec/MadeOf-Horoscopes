@@ -20,12 +20,6 @@ class HoroscopesController < ApplicationController
     end 
 
 
-    def get_site
-        site = open("https://www.thestar.com.my/lifestyle/horoscope")
-        t = Nokogiri::HTML(site)
-        
-    end
-
 end
 
 
