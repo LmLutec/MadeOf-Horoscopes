@@ -8,7 +8,7 @@ class HoroscopesController < ApplicationController
     def index
        horoscopes = Horoscope.all 
        daily_page
-       render json: horoscopes, include: [:dailies]
+       render json: horoscopes, only:[:name, :start_date, :end_date, :symbol, :house, :planet, :element, :quality, :polarity], include: [:dailies]
     end 
     
     def create
@@ -35,15 +35,17 @@ class HoroscopesController < ApplicationController
         @@arr.uniq!.each do |d|
             site = open(d)
             doc = Nokogiri::HTML(site)
-            reading = doc.css('.horoscope-content').css('p')
-            date = doc.css('.horoscope-content').css('h2')
+            reading = doc.css('.horoscope-content').css('p').text
+            date = doc.css('.horoscope-content').css('h2').text
             sign = d.split("/").last.capitalize
-            h = Horoscope.find_by(name: sign)
-
-            Daily.create
+            find_horoscope = Horoscope.find_by(name: sign) 
+            find_horoscope.dailies.each do |i|
+                if i.date != date
+                    Daily.create(horoscope_id: find_horoscope.id, date: date, text: reading)
+                end 
+            end 
         end 
     end 
-
 end
 
 

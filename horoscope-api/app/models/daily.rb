@@ -1,3 +1,3 @@
 class Daily < ApplicationRecord
-    belongs_to :horoscopes
+    belongs_to :horoscope
 end

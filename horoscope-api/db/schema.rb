@@ -13,11 +13,12 @@
 ActiveRecord::Schema.define(version: 2020_04_25_190059) do
 
   create_table "dailies", force: :cascade do |t|
+    t.integer "horoscope_id"
     t.string "date"
     t.text "text"
-    t.integer "horoscope_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["horoscope_id"], name: "index_dailies_on_horoscope_id"
   end
 
   create_table "horoscopes", force: :cascade do |t|
