@@ -19,7 +19,7 @@ fetch(HOROSCOPES_URL)
       })
 
 
-fetch(DAILY_HOROSCOPES)
+fetch('https://www.horoscope.com/us/horoscopes/general/horoscope-general-daily-today.aspx?sign=5')
       .then(function(response) {
           return response.json();
       })
