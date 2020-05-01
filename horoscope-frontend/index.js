@@ -19,11 +19,11 @@ fetch(HOROSCOPES_URL)
       })
 
 
-fetch('https://www.horoscope.com/us/horoscopes/general/horoscope-general-daily-today.aspx?sign=5')
-      .then(function(response) {
-          return response.json();
-      })
-      .then(function(data){
-          console.log(data)
-      })
+// fetch('https://sun_sign_prediction/daily/:zodiacName')
+//       .then(function(response) {
+//           return response.json();
+//       })
+//       .then(function(data){
+//           console.log(data)
+//       })
    
