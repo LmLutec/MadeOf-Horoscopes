@@ -27,9 +27,11 @@ class Scraper < ApplicationController
             
             find_horoscope.dailies.each do |i|
                 if i.date != date
-                    Daily.create(horoscope_id: find_horoscope.id, date: new_date, text: reading)
+                   find_horoscope.dailies << Daily.create(horoscope_id: find_horoscope.id, date: new_date, text: reading)
                 end 
             end 
         end 
     end 
+
+    ##scraper = Scraper.new.daily_page
 end 
