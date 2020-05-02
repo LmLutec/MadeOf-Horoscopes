@@ -3,7 +3,11 @@ class HoroscopesController < ApplicationController
     def index
        Scraper.new.daily_page
        horoscopes = Horoscope.all 
-       render json: horoscopes, only:[:name, :start_date, :end_date, :symbol, :house, :planet, :element, :quality, :polarity], include: [:dailies]
+
+       options = {
+           include: [:dailies] 
+       }
+       render json: HoroscopeSerializer.new(horoscopes, options)
     end 
     
     def create
@@ -12,7 +16,7 @@ class HoroscopesController < ApplicationController
 
     def show
         horoscope = Horoscope.find(params[:id])
-        render json: horoscope, only:[:name, :start_date, :end_date, :symbol, :house, :planet, :element, :quality, :polarity], include: [:dailies]
+        render json: HoroscopeSerializer.new(horoscope)
     end 
 
 end
