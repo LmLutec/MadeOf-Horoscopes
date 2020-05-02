@@ -8,15 +8,17 @@ fetch(HOROSCOPES_URL)
         return response.json();
     })
     .then(function(json){
-        
-        json.forEach(element => {
-            let sign = document.createElement("LI") 
-            sign.innerHTML = element.name    
-            document.body.appendChild(sign)
-        });
+        console.log(json)
+        // json.forEach(element => {
+        //     let sign = document.createElement("LI") 
+        //     sign.innerHTML = element.name    
+        //     document.body.appendChild(sign)
+        // });
         
       })
 
 
 
-   
+   let s = document.getElementsByClassName('signs')[0]
+   console.log(s)
+        
