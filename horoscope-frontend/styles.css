@@ -3,8 +3,8 @@ body{
 }
 
 img {
-    max-width: 50%;
-    height: auto;
+    width: 20%;
+    height: 150px;
     opacity: 0.5;
   }
 
