@@ -19,6 +19,21 @@ fetch(HOROSCOPES_URL)
 
 
 
-   let s = document.getElementsByClassName('signs')[0]
-   console.log(s)
+//    let signs = document.getElementsByClassName('signs')[0].children
+//    let signValues = Object.values(signs)
+      //console.log(signValues)
+
+      
+//    signValues.forEach(element => {
         
+//    });
+        
+s = document.getElementsByClassName('sign')
+
+for (const element of s) {
+    element.addEventListener("click", function(){
+        alert('true') 
+    })
+  }
+
+ 
