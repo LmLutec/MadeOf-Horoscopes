@@ -30,9 +30,16 @@ fetch(HOROSCOPES_URL)
         
 s = document.getElementsByClassName('sign')
 
+
 for (const element of s) {
+    console.log(element.alt)
     element.addEventListener("click", function(){
-        alert('true') 
+        let d = document.createElement("dialog")
+        d.open = true
+        let p = document.createElement("p")
+        document.body.appendChild(d)  
+        d.appendChild(p)
+        p.innerText = "true"
     })
   }
 
