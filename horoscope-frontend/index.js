@@ -20,14 +20,63 @@ fetch(HOROSCOPES_URL)
                     
                     let para = document.getElementById(`${imgSrc.alt}`)
 
-                    let header = document.createElement('h2')
+                    let header = document.createElement('h4')
                     header.innerHTML = horoscope.name
                         
                     para.appendChild(header)
 
-                    para.innerHTML = `House: ${horoscope.house}`
+                    let list = document.createElement('ul')
+
+                    para.appendChild(list)
+
+                    let dates = document.createElement('h4')
+                    dates.innerHTML = `${horoscope.start_date} - ${horoscope.end_date}`
+
+                    let symbol = document.createElement('li')
+                    symbol.innerText =  `Symbol: ${horoscope.symbol}`
+
+                    let house = document.createElement('li')
+                    house.innerText = `House: ${horoscope.house}`
+
+                    let planet = document.createElement('li')
+                    planet.innerText = `Ruling planet: ${horoscope.planet}`
+
+                    let element = document.createElement('li')
+                    element.innerText = `Element: ${horoscope.element}`
+
+                    let quality = document.createElement('li')
+                    quality.innerText = `Quality: ${horoscope.quality}`
+
+                    let polarity = document.createElement('li')
+                    polarity.innerText = `Polarity: ${horoscope.polarity}`
+
+                    list.appendChild(dates)
+                    list.appendChild(symbol)
+                    list.appendChild(house)
+                    list.appendChild(planet)
+                    list.appendChild(element)
+                    list.appendChild(quality)
+                    list.appendChild(polarity)
+
+                    console.log(signData.relationships)
+                    
                 }
             }
+
+
+
+
+           
+         
+
+
+
+
+
+
+
+
+
                     //let p = document.getElementsByClassName('description')
             
                     // for (const i of p){

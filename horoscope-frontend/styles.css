@@ -12,7 +12,6 @@ img {
   }
 
 
-p.description {
-    color: white;
-    display: block;
+li {
+    list-style: none;
 }
