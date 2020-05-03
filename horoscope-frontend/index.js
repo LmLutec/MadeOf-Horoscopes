@@ -8,14 +8,42 @@ fetch(HOROSCOPES_URL)
         return response.json();
     })
     .then(function(json){
-        //console.log(json)
-        json.data.forEach(element => {
+        
+         json.data.forEach(signData => {
+           let horoscope = signData.attributes
+
             s = document.getElementsByClassName('sign')
            
-            for (const ele of s){
-                console.log(ele)
-                let sec = document.createElement("section")
+            for (const imgSrc of s){
+                
+                if (horoscope.name.toLowerCase() == imgSrc.alt){  
+                    
+                    let para = document.getElementById(`${imgSrc.alt}`)
 
+                    let header = document.createElement('h2')
+                    header.innerHTML = horoscope.name
+                        
+                    para.appendChild(header)
+
+                    para.innerHTML = `House: ${horoscope.house}`
+                }
+            }
+                    //let p = document.getElementsByClassName('description')
+            
+                    // for (const i of p){
+                    //     console.log(i.innerHTML = signData.attributes.name)
+                    // }
+                //}
+            })
+              //if (element.attributes.name.toLowerCase() == ele.alt){
+            
+             // }
+           
+  
+            
+                //  console.log(a)
+                
+              //  }
                 // if (element.attributes.name.toLowerCase() == ele.alt){
                 //     p = document.createElement('p')
                 //     ele.appendChild(p)
@@ -29,7 +57,11 @@ fetch(HOROSCOPES_URL)
                 // let rejoinSigns = splitSigns.join(" ")
                 
                 
-            }
+           // }
+
+
+       
+         
         
             // if (element.attributes.name == element.alt.toUpperCase()){
             //     console.log('true')
@@ -42,7 +74,7 @@ fetch(HOROSCOPES_URL)
             // document.body.appendChild(sign)
         });
         
-      })
+      //})
 
 
 

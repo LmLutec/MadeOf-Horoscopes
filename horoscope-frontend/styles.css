@@ -12,3 +12,7 @@ img {
   }
 
 
+p.description {
+    color: white;
+    display: block;
+}
