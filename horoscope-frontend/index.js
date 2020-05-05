@@ -9,7 +9,8 @@ fetch(HOROSCOPES_URL)
     })
     .then(function(json){
         
-         json.data.forEach(signData => {
+         json.forEach(signData => {
+
            let horoscope = signData.attributes
 
             s = document.getElementsByClassName('sign')

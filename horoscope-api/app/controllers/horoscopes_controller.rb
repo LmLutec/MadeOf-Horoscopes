@@ -14,7 +14,8 @@ class HoroscopesController < ApplicationController
        options = {
            include: [:dailies] 
        }
-       render json: HoroscopeSerializer.new(horoscopes, options)
+       render json: horoscopes, include: [:dailies]
+       ##HoroscopeSerializer.new(horoscopes, options)
     end 
     
     def create
