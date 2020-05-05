@@ -7,7 +7,7 @@ class HoroscopesController < ApplicationController
     @@arr = []
 
     def index
-        daily_page
+       daily_page
        
        horoscopes = Horoscope.all 
 
@@ -47,7 +47,15 @@ class HoroscopesController < ApplicationController
             sign = d.split("/").last.capitalize
             find_horoscope = Horoscope.find_by(name: sign) 
             
-            find_horoscope.dailies << Daily.create(horoscope_id: find_horoscope.id, date: date, text: reading)
+            if find_horoscope.dailies.length != 0 
+                find_horoscope.dailies.each do |i|
+                    if i.date != date
+                    find_horoscope.dailies << Daily.create(horoscope_id: find_horoscope.id, date: date, text: reading)
+                    end 
+                end 
+            else 
+                find_horoscope.dailies << Daily.create(horoscope_id: find_horoscope.id, date: date, text: reading)
+            end
         end 
     end 
 end
