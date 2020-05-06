@@ -9,124 +9,73 @@ fetch(HOROSCOPES_URL)
     })
     .then(function(json){
         
-         json.forEach(signData => {
+         setUpHoroscopes(json)
 
-           let horoscope = signData.attributes
-
-            s = document.getElementsByClassName('sign')
-           
-            for (const imgSrc of s){
-                
-                if (horoscope.name.toLowerCase() == imgSrc.alt){  
-                    
-                    let para = document.getElementById(`${imgSrc.alt}`)
-
-                    let header = document.createElement('h4')
-                    header.innerHTML = horoscope.name
-                        
-                    para.appendChild(header)
-
-                    let list = document.createElement('ul')
-
-                    para.appendChild(list)
-
-                    let dates = document.createElement('h4')
-                    dates.innerHTML = `${horoscope.start_date} - ${horoscope.end_date}`
-
-                    let symbol = document.createElement('li')
-                    symbol.innerText =  `Symbol: ${horoscope.symbol}`
-
-                    let house = document.createElement('li')
-                    house.innerText = `House: ${horoscope.house}`
-
-                    let planet = document.createElement('li')
-                    planet.innerText = `Ruling planet: ${horoscope.planet}`
-
-                    let element = document.createElement('li')
-                    element.innerText = `Element: ${horoscope.element}`
-
-                    let quality = document.createElement('li')
-                    quality.innerText = `Quality: ${horoscope.quality}`
-
-                    let polarity = document.createElement('li')
-                    polarity.innerText = `Polarity: ${horoscope.polarity}`
-
-                    list.appendChild(dates)
-                    list.appendChild(symbol)
-                    list.appendChild(house)
-                    list.appendChild(planet)
-                    list.appendChild(element)
-                    list.appendChild(quality)
-                    list.appendChild(polarity)
-
-                    console.log(signData.relationships)
-                    
-                }
-            }
-
-
-
-
-           
          
+     });
+        
+ 
 
+function setUpHoroscopes (arr){
+  arr.forEach(signData => {
 
-
-
-
-
-
-
-
-                    //let p = document.getElementsByClassName('description')
-            
-                    // for (const i of p){
-                    //     console.log(i.innerHTML = signData.attributes.name)
-                    // }
-                //}
-            })
-              //if (element.attributes.name.toLowerCase() == ele.alt){
-            
-             // }
-           
-  
-            
-                //  console.log(a)
-                
-              //  }
-                // if (element.attributes.name.toLowerCase() == ele.alt){
-                //     p = document.createElement('p')
-                //     ele.appendChild(p)
-                //     p.innerText = `${element.attributes.name} , ${element.attributes.house}`
-                // } **WORKING CODE
-               
-                // let splitSigns = ele.alt.split("")
-                // let changeCase = splitSigns[0].toUpperCase()
-                // splitSigns.shift()
-                // splitSigns.unshift(changeCase)
-                // let rejoinSigns = splitSigns.join(" ")
-                
-                
-           // }
-
-
-       
+     s = document.getElementsByClassName('sign')
+    
+     for (const imgSrc of s){
          
-        
-            // if (element.attributes.name == element.alt.toUpperCase()){
-            //     console.log('true')
-            // }
-            // else {
-            //     console.log('false')
-            // }
-            // let sign = document.createElement("LI") 
-            // sign.innerHTML = element.name    
-            // document.body.appendChild(sign)
-        });
-        
-      //})
+         if (signData.name.toLowerCase() == imgSrc.alt){  
+             
+             let para = document.getElementById(`${imgSrc.alt}`)
 
+             let header = document.createElement('h4')
+             header.innerHTML = signData.name
+                 
+             para.appendChild(header)
 
+             let list = document.createElement('ul')
+
+             para.appendChild(list)
+
+             let dates = document.createElement('h4')
+             dates.innerHTML = `${signData.start_date} - ${signData.end_date}`
+
+             let symbol = document.createElement('li')
+             symbol.innerText =  `Symbol: ${signData.symbol}`
+
+             let house = document.createElement('li')
+             house.innerText = `House: ${signData.house}`
+
+             let planet = document.createElement('li')
+             planet.innerText = `Ruling planet: ${signData.planet}`
+
+             let element = document.createElement('li')
+             element.innerText = `Element: ${signData.element}`
+
+             let quality = document.createElement('li')
+             quality.innerText = `Quality: ${signData.quality}`
+
+             let polarity = document.createElement('li')
+             polarity.innerText = `Polarity: ${signData.polarity}`
+
+             list.appendChild(dates)
+             list.appendChild(symbol)
+             list.appendChild(house)
+             list.appendChild(planet)
+             list.appendChild(element)
+             list.appendChild(quality)
+             list.appendChild(polarity)
+
+             //console.log(signData.relationships)
+             let daily = signData.dailies
+
+             daily.forEach(day => {
+               console.log(day)
+               // code needs to check the current date and only display the daily of the day
+             })
+         }
+     }
+    })
+}
 
 
 //    let signs = document.getElementsByClassName('signs')[0].children
