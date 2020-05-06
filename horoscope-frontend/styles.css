@@ -2,15 +2,23 @@ body{
     background-color: #003366;
 }
 
+@keyframes example {
+    
+  }
+
 img {
     width: 20%;
     height: 150px;
-    position: relative;
-    right: -100px;
+    /* position: relative;
+     right: -100px; */
     padding: 10px;
     border-radius: 25px;
   }
 
+img.sign {
+    animation-name: example;
+    animation-duration: 4s;
+}
 
 li {
     list-style: none;

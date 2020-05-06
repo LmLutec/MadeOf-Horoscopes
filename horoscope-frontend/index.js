@@ -69,7 +69,7 @@ function setUpHoroscopes (arr){
              let daily = signData.dailies
 
              daily.forEach(day => {
-               console.log(day)
+               //console.log(day)
                // code needs to check the current date and only display the daily of the day
              })
          }
@@ -87,19 +87,20 @@ function setUpHoroscopes (arr){
         
 //    });
         
-// s = document.getElementsByClassName('sign')
+ s = document.getElementsByClassName('sign')
 
 
-// for (const element of s) {
-//     console.log(element.alt)
-//     element.addEventListener("click", function(){
-//         let d = document.createElement("dialog")
-//         d.open = true
-//         let p = document.createElement("p")
-//         document.body.appendChild(d)  
-//         d.appendChild(p)
-//         p.innerText = "true"
-//     })
-//   }
+for (const element of s) {
+    
+    element.addEventListener("click", function(){
+      element.style= "transform: translate(9em,0)"
+        // let d = document.createElement("dialog")
+        // d.open = true
+        // let p = document.createElement("p")
+        // document.body.appendChild(d)  
+        // d.appendChild(p)
+        // p.innerText = "true"
+    })
+  }
 
- 
+  //style="transform: translate(3em,0);
