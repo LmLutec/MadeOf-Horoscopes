@@ -3,6 +3,7 @@ const HOROSCOPES_URL = `${BASE_URL}/horoscopes`
 
 
 
+
 fetch(HOROSCOPES_URL)
     .then(function(response) {
         return response.json();
@@ -69,7 +70,12 @@ function setUpHoroscopes (arr){
              let daily = signData.dailies
 
              daily.forEach(day => {
-               //console.log(day)
+                let d = document.createElement('div')
+                d.innerHTML = day.text
+                d.id = day.id
+                let lowerCaseName = signData.name.toLowerCase()
+                let sec = document.getElementById(`${lowerCaseName}`)
+                sec.appendChild(d)
                // code needs to check the current date and only display the daily of the day
              })
          }
@@ -78,11 +84,13 @@ function setUpHoroscopes (arr){
 }
 
 
-//    let signs = document.getElementsByClassName('signs')[0].children
+    //let signs = document.getElementsByClassName('signs')[0].children
 //    let signValues = Object.values(signs)
       //console.log(signValues)
 
-      
+      // for (const element of signs) {
+      //   console.log(element)
+      // }
 //    signValues.forEach(element => {
         
 //    });
@@ -93,7 +101,33 @@ function setUpHoroscopes (arr){
 for (const element of s) {
     
     element.addEventListener("click", function(){
-      element.style= "transform: translate(9em,0)"
+
+      let name = element.alt
+      
+      let i = document.getElementById(`${name}`).getElementsByTagName('ul')
+      
+      for (const x of i){
+        //if (x.style.display === "none"){
+          x.style.display = "block"
+        //}
+        // if (x.style.display === "block"){
+        //   x.style.display = "none"
+        // }
+        // else if (x.style.display === "none"){
+        //   x.style.display = "block"
+        // }
+        // else if (x.style.display === "block"){
+        //   x.style.display = "none"
+        // }
+        
+      } 
+
+      // for (const i of u){
+      //   i.style.display = "block"
+      //   console.log(i)
+      // }
+      //console.log(i.children)
+      //element.style.display = none;
         // let d = document.createElement("dialog")
         // d.open = true
         // let p = document.createElement("p")
