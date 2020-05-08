@@ -49,9 +49,9 @@ class HoroscopesController < ApplicationController
             find_horoscope = Horoscope.find_by(name: sign) 
             
             if find_horoscope.dailies.length != 0 
-                find_horoscope.dailies.each do |i|
-                    if i.date != date
-                    find_horoscope.dailies << Daily.create(horoscope_id: find_horoscope.id, date: date, text: reading)
+                find_horoscope.dailies.each do |daily|
+                    if !find_horoscope.dailies.exists?(date: date)
+                        find_horoscope.dailies << Daily.create(horoscope_id: find_horoscope.id, date: date, text: reading)
                     end 
                 end 
             else 

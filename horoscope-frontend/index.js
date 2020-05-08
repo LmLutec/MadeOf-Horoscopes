@@ -10,9 +10,7 @@ fetch(HOROSCOPES_URL)
     })
     .then(function(json){
         
-         setUpHoroscopes(json)
-
-         
+         setUpHoroscopes(json)      
      });
         
  
@@ -76,8 +74,8 @@ function setUpHoroscopes (arr){
                 let lowerCaseName = signData.name.toLowerCase()
                 let sec = document.getElementById(`${lowerCaseName}`)
                 sec.appendChild(d)
-               // code needs to check the current date and only display the daily of the day
-             })
+              // code needs to check the current date and only display the daily of the day
+            })
          }
      }
     })
@@ -94,21 +92,29 @@ function setUpHoroscopes (arr){
 //    signValues.forEach(element => {
         
 //    });
-        
- s = document.getElementsByClassName('sign')
+        //working code
+//  s = document.getElementsByClassName('sign')
 
 
-for (const element of s) {
+// for (const element of s) {
     
-    element.addEventListener("click", function(){
+//     element.addEventListener("click", function(){
 
-      let name = element.alt
+//       let name = element.alt
       
-      let i = document.getElementById(`${name}`).getElementsByTagName('ul')
+//       let i = document.getElementById(`${name}`).getElementsByTagName('ul')
       
-      for (const x of i){
-        //if (x.style.display === "none"){
-          x.style.display = "block"
+//       for (const x of i){
+       
+//           x.style.display = "block"
+//       }
+//     })
+//   }
+
+
+
+
+           //if (x.style.display === "none"){
         //}
         // if (x.style.display === "block"){
         //   x.style.display = "none"
@@ -120,7 +126,7 @@ for (const element of s) {
         //   x.style.display = "none"
         // }
         
-      } 
+    
 
       // for (const i of u){
       //   i.style.display = "block"
@@ -134,7 +140,6 @@ for (const element of s) {
         // document.body.appendChild(d)  
         // d.appendChild(p)
         // p.innerText = "true"
-    })
-  }
+  
 
   //style="transform: translate(3em,0);
