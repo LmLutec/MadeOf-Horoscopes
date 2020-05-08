@@ -1,6 +1,6 @@
 const BASE_URL = "http://localhost:3000"
 const HOROSCOPES_URL = `${BASE_URL}/horoscopes`
-
+const todaysDate = new Date().toJSON().slice(0,10);
 
 
 
@@ -23,7 +23,7 @@ function setUpHoroscopes (arr){
      for (const imgSrc of s){
          
          if (signData.name.toLowerCase() == imgSrc.alt){  
-             
+
              let para = document.getElementById(`${imgSrc.alt}`)
 
              let header = document.createElement('h4')
@@ -65,21 +65,59 @@ function setUpHoroscopes (arr){
              list.appendChild(polarity)
 
              //console.log(signData.relationships)
-             let daily = signData.dailies
+             let dailies = signData.dailies
 
-             daily.forEach(day => {
+             dailies.forEach(daily => {
+              //  console.log(todaysDate == daily.date)
+               
+              //  console.log(`todays: ${todaysDate}`)
+              //  console.log(`daily date: ${daily.date}`)
+               
+              
+               
+               //if (todaysDate == daily.date){
                 let d = document.createElement('div')
-                d.innerHTML = day.text
-                d.id = day.id
+                d.innerHTML = daily.text
+                d.id = daily.id
+                d.className = "daily"
                 let lowerCaseName = signData.name.toLowerCase()
                 let sec = document.getElementById(`${lowerCaseName}`)
+              //console.log(sec)
                 sec.appendChild(d)
+              // }
               // code needs to check the current date and only display the daily of the day
             })
          }
      }
-    })
-}
+    }) // before 1st for loop
+  }
+// event listener code
+    //  for (const element of s) {
+         //console.log(signData.id)
+        // element.addEventListener("click", function(){
+     
+          //  let name = element.alt
+           
+          //  let wholeList = document.getElementById(`${name}`).getElementsByTagName('ul')
+           
+           //let dailyText = document.getElementById(`${name}`).getElementsByClassName('daily')
+
+          //  for (const i of wholeList){
+            
+          //      i.style.display = "block"
+
+              // dailyText.display = "block"
+          // }
+     
+           //let grabDivs = document.getElementById(div.)
+        // })
+      // }
+
+
+
+
+
+
 
 
     //let signs = document.getElementsByClassName('signs')[0].children
@@ -93,23 +131,7 @@ function setUpHoroscopes (arr){
         
 //    });
         //working code
-//  s = document.getElementsByClassName('sign')
 
-
-// for (const element of s) {
-    
-//     element.addEventListener("click", function(){
-
-//       let name = element.alt
-      
-//       let i = document.getElementById(`${name}`).getElementsByTagName('ul')
-      
-//       for (const x of i){
-       
-//           x.style.display = "block"
-//       }
-//     })
-//   }
 
 
 
@@ -141,5 +163,3 @@ function setUpHoroscopes (arr){
         // d.appendChild(p)
         // p.innerText = "true"
   
-
-  //style="transform: translate(3em,0);
