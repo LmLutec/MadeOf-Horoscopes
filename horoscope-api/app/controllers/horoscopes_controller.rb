@@ -43,7 +43,7 @@ class HoroscopesController < ApplicationController
             site = open(d)
             doc = Nokogiri::HTML(site)
             reading = doc.css('.horoscope-content').css('p').text
-            
+            edited_text = reading.slice!("What's in the stars for you tomorrow? Read it now.") 
             date = doc.css('.horoscope-content').css('h2').children[0].text.strip
             sign = d.split("/").last.capitalize
             find_horoscope = Horoscope.find_by(name: sign) 
