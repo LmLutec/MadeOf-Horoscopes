@@ -11,15 +11,17 @@ img {
     height: 150px; */
     /* position: relative;
      right: -100px; */
+    /* position: absolute; */
+    right: 150px;  
     padding: 10px;
     border-radius: 25px;
     opacity: 50%;
   }
 
-img.sign {
+/* img.sign {
     animation-name: example;
     animation-duration: 4s;
-}
+} */
 
 li {
     list-style: none;
@@ -28,9 +30,14 @@ li {
 
 ul {
     display: none;
+    position: relative; 
+    right: 0;
 }
 
 section {
-    position: relative;
+    display: inline-block;
 }
 
+div#info {
+    display: none;
+}

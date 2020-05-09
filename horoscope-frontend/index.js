@@ -26,14 +26,20 @@ function setUpHoroscopes (arr){
 
              let para = document.getElementById(`${imgSrc.alt}`)
 
+             let newDiv = document.createElement('div')
+             newDiv.id = `${imgSrc.alt}-info`
+             newDiv.className = "info"
+
              let header = document.createElement('h4')
              header.innerHTML = signData.name
                  
              para.appendChild(header)
 
+             para.appendChild(newDiv)
+
              let list = document.createElement('ul')
 
-             para.appendChild(list)
+             newDiv.appendChild(list)
 
              let dates = document.createElement('h4')
              dates.innerHTML = `${signData.start_date} - ${signData.end_date}`
@@ -64,56 +70,62 @@ function setUpHoroscopes (arr){
              list.appendChild(quality)
              list.appendChild(polarity)
 
-             //console.log(signData.relationships)
              let dailies = signData.dailies
 
              dailies.forEach(daily => {
-              //  console.log(todaysDate == daily.date)
-               
-              //  console.log(`todays: ${todaysDate}`)
-              //  console.log(`daily date: ${daily.date}`)
-               
-              
-               
-               //if (todaysDate == daily.date){
-                let d = document.createElement('div')
-                d.innerHTML = daily.text
-                d.id = daily.id
-                d.className = "daily"
+          
+                let divider = document.createElement('div')
+
+                divider.innerHTML = `${daily.date} - ${daily.text}`
+                divider.id = daily.id
+                divider.className = "daily"
                 let lowerCaseName = signData.name.toLowerCase()
                 let sec = document.getElementById(`${lowerCaseName}`)
-              //console.log(sec)
-                sec.appendChild(d)
-              // }
-              // code needs to check the current date and only display the daily of the day
+
+                
+                newDiv.appendChild(divider)
+          
             })
          }
      }
+     for (const img of s) {
+
+      img.addEventListener("click", function(){
+   
+         let name = img.alt
+
+         let find = document.getElementById(`${name}-info`)
+         
+         let wholeList = document.getElementById(`${name}`).getElementsByTagName('ul')
+         
+         let dailyText = document.getElementById(`${name}`).getElementsByClassName('daily')
+
+
+         console.log(find)
+         for (const i of wholeList){
+           //console.log(i)
+            if (i.style.display === "none"){
+              i.style.display = "block"
+            }
+            if (i.style.display === "block"){
+              i.style.display = "none"
+            }
+        }
+
+        // for (const text of dailyText){
+        
+        //   text.style.display = "block"
+        // }
+   
+      })
+    }
+    // end of for loop
+
     }) // before 1st for loop
   }
 // event listener code
-    //  for (const element of s) {
-         //console.log(signData.id)
-        // element.addEventListener("click", function(){
-     
-          //  let name = element.alt
-           
-          //  let wholeList = document.getElementById(`${name}`).getElementsByTagName('ul')
-           
-           //let dailyText = document.getElementById(`${name}`).getElementsByClassName('daily')
 
-          //  for (const i of wholeList){
-            
-          //      i.style.display = "block"
-
-              // dailyText.display = "block"
-          // }
-     
-           //let grabDivs = document.getElementById(div.)
-        // })
-      // }
-
-
+    
 
 
 
