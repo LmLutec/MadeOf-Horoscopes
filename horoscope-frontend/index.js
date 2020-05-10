@@ -26,20 +26,19 @@ function setUpHoroscopes (arr){
 
              let para = document.getElementById(`${imgSrc.alt}`)
 
-             let newDiv = document.createElement('div')
-             newDiv.id = `${imgSrc.alt}-info`
-             newDiv.className = "info"
+            //  let newDiv = document.createElement('div')
+            //  newDiv.id = `${imgSrc.alt}-info`
+            //  newDiv.className = "info"
 
-             let header = document.createElement('h4')
-             header.innerHTML = signData.name
-                 
-             para.appendChild(header)
 
-             para.appendChild(newDiv)
+            // para.appendChild(newDiv)
 
-             let list = document.createElement('ul')
+             let list = document.createElement('details')
+             let summary = document.createElement('summary')
+             summary.innerText = signData.name
+             list.appendChild(summary)
 
-             newDiv.appendChild(list)
+             para.appendChild(list)
 
              let dates = document.createElement('h4')
              dates.innerHTML = `${signData.start_date} - ${signData.end_date}`
@@ -72,8 +71,9 @@ function setUpHoroscopes (arr){
 
              let dailies = signData.dailies
 
+
              dailies.forEach(daily => {
-          
+              
                 let divider = document.createElement('div')
 
                 divider.innerHTML = `${daily.date} - ${daily.text}`
@@ -83,47 +83,23 @@ function setUpHoroscopes (arr){
                 let sec = document.getElementById(`${lowerCaseName}`)
 
                 
-                newDiv.appendChild(divider)
+                para.appendChild(divider)
           
             })
          }
      }
-     for (const img of s) {
-
-      img.addEventListener("click", function(){
-   
-         let name = img.alt
-
-         let find = document.getElementById(`${name}-info`)
-         
-         let wholeList = document.getElementById(`${name}`).getElementsByTagName('ul')
-         
-         let dailyText = document.getElementById(`${name}`).getElementsByClassName('daily')
-
-
-         console.log(find)
-         for (const i of wholeList){
-           //console.log(i)
-            if (i.style.display === "none"){
-              i.style.display = "block"
-            }
-            if (i.style.display === "block"){
-              i.style.display = "none"
-            }
-        }
-
-        // for (const text of dailyText){
-        
-        //   text.style.display = "block"
-        // }
+    
    
       })
     }
-    // end of for loop
 
-    }) // before 1st for loop
-  }
-// event listener code
+
+  
+// <details>
+//   <summary>Copyright 1999-2018.</summary>
+//   <p> - by Refsnes Data. All Rights Reserved.</p>
+//   <p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
+// </details>
 
     
 

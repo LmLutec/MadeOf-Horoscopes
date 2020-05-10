@@ -2,10 +2,6 @@ body{
     background-color: #003366;
 }
 
-@keyframes example {
-    
-  }
-
 img {
     /* width: 20%;
     height: 150px; */
@@ -22,22 +18,27 @@ img {
     animation-name: example;
     animation-duration: 4s;
 } */
-
+ 
 li {
     list-style: none;
     
 }
 
-ul {
-    display: none;
-    position: relative; 
-    right: 0;
+details {
+    display: inline-block;
+    top: 150px;
+    
+} 
+/* 
+summary {
+    float: right;
+} */
+
+div.daily {
+    display: inline-block;
 }
 
 section {
     display: inline-block;
 }
 
-div#info {
-    display: none;
-}
