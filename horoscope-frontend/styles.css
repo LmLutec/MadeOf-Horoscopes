@@ -3,42 +3,21 @@ body{
 }
 
 img {
-    /* width: 20%;
-    height: 150px; */
-    /* position: relative;
-     right: -100px; */
-    /* position: absolute; */
     right: 150px;  
     padding: 10px;
     border-radius: 25px;
     opacity: 50%;
+    display: inline-block;
   }
-
-/* img.sign {
-    animation-name: example;
-    animation-duration: 4s;
-} */
  
 li {
     list-style: none;
     
 }
 
-details {
-    display: inline-block;
-    top: 150px;
-    
-} 
-/* 
-summary {
-    float: right;
-} */
-
-div.daily {
-    display: inline-block;
-}
 
 section {
-    display: inline-block;
+ /* display: inline-block; */
+    display: none;
 }
 

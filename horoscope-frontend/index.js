@@ -17,6 +17,7 @@ fetch(HOROSCOPES_URL)
 
 function setUpHoroscopes (arr){
   arr.forEach(signData => {
+    
 
      s = document.getElementsByClassName('sign')
     
@@ -26,12 +27,6 @@ function setUpHoroscopes (arr){
 
              let para = document.getElementById(`${imgSrc.alt}`)
 
-            //  let newDiv = document.createElement('div')
-            //  newDiv.id = `${imgSrc.alt}-info`
-            //  newDiv.className = "info"
-
-
-            // para.appendChild(newDiv)
 
              let list = document.createElement('details')
              let summary = document.createElement('summary')
@@ -93,16 +88,28 @@ function setUpHoroscopes (arr){
       })
     }
 
+  s = document.getElementsByClassName('sign')
+
+for (const img of s){
+  img.addEventListener('click', function(){
+  
+    let para = document.getElementById(`${img.alt}`)
+
+    if (para.style.display === "" || para.style.display === "none"){
+      para.style.display = "inline-block"
+    }
+    else if (para.style.display === "inline-block"){
+      para.style.display = "none"
+    }
+    console.log(para.style.display)
+    
+    // else if (para.style.display === "inline-block"){
+    //   para.style.display = "none"
+    // }
+  })
+} 
 
   
-// <details>
-//   <summary>Copyright 1999-2018.</summary>
-//   <p> - by Refsnes Data. All Rights Reserved.</p>
-//   <p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
-// </details>
-
-    
-
 
 
 
