@@ -28,7 +28,7 @@ function setUpHoroscopes (arr){
              let para = document.getElementById(`${imgSrc.alt}`)
 
 
-             let list = document.createElement('details')
+             let list = document.createElement('ul')
              let summary = document.createElement('summary')
              summary.innerText = signData.name
              list.appendChild(summary)
@@ -67,12 +67,13 @@ function setUpHoroscopes (arr){
              let dailies = signData.dailies
 
 
-             dailies.forEach(daily => {
+             let currentDaily = dailies[dailies.length - 1]
+            
               
                 let divider = document.createElement('div')
 
-                divider.innerHTML = `${daily.date} - ${daily.text}`
-                divider.id = daily.id
+                divider.innerHTML = `${currentDaily.date} - ${currentDaily.text}`
+                divider.id = currentDaily.id
                 divider.className = "daily"
                 let lowerCaseName = signData.name.toLowerCase()
                 let sec = document.getElementById(`${lowerCaseName}`)
@@ -80,7 +81,6 @@ function setUpHoroscopes (arr){
                 
                 para.appendChild(divider)
           
-            })
          }
      }
     
@@ -101,11 +101,6 @@ for (const img of s){
     else if (para.style.display === "inline-block"){
       para.style.display = "none"
     }
-    console.log(para.style.display)
-    
-    // else if (para.style.display === "inline-block"){
-    //   para.style.display = "none"
-    // }
   })
 } 
 

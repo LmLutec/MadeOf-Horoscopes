@@ -12,12 +12,11 @@ img {
  
 li {
     list-style: none;
-    
 }
 
 
 section {
- /* display: inline-block; */
     display: none;
+    color: white;
 }
 

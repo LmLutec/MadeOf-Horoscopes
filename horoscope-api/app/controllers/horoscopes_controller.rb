@@ -48,6 +48,8 @@ class HoroscopesController < ApplicationController
             if reading == "What's in the stars for you tomorrow? Read it now."
                 str = doc.css('.horoscope-content').css('div').text
                 new_str = str.slice(0..(str.index('Read the daily horoscope for another zodiac sign:')))
+                new_str = new_str.gsub(/\s+/, " ")
+                reading = new_str
             end 
             edited_text = reading.slice!("What's in the stars for you tomorrow? Read it now.") 
             date = doc.css('.horoscope-content').css('h2').children[0].text.strip
