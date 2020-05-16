@@ -88,6 +88,18 @@ function setUpHoroscopes (arr){
             elementDiv.appendChild(elementHdr)
             elementDiv.appendChild(elementP)
             
+// creating qualities
+
+            let qualityDiv = document.createElement('div')
+            let qualityHdr = document.createElement('h4')
+            qualityDiv.innerText = "The qualities, also called 'modes', or 'modalities', indicate how people respond to stimuli, and especially how they act under tension..."
+            let qualityP = document.createElement('p')
+            qualityP.innerText = getQuality(signData.quality)
+
+            signId.appendChild(qualityDiv)
+            qualityDiv.appendChild(qualityHdr)
+            qualityDiv.appendChild(qualityP)
+
             
 //creating daily
              let dailies = signData.dailies
@@ -189,6 +201,21 @@ function getElement(element){
       break; 
     case 'Water':
       return "Water signs respond to energy almost unconsciously. They are deeply emotional. Cancer is motivated to nurture and be nurtured. Scorpio has intense vision, never swaying, looking straight ahead with laser-like focus. Pisces is the trickiest to describe. Pisces energy is chameleon-like, absorbing its surroundings."
+      break;
+  }
+}
+
+
+function getQuality(quality){
+  switch(quality){
+    case 'Cardinal':
+      return "Cardinal Signs are the most assertive, the most interested in initiating change. Their mode of activity is to start new things. They easily begin things and respond well to new ideas. They are self-starters. Crisis motivates them. They achieve control by remaining one step ahead of everyone else. Aries seeks leadership and control in general, Cancer controls emotions, home, and family; Libra tries to control partnerships; Capricorn controls, uses, and exploits the material environment. For Cardinal signs, things are always happening. This is usually because they are doing the starting. The four Cardinal signs are at the first month of each season."
+      break;
+    case 'Fixed':
+      return "Fixed Signs are the most stable and self-contained. Their mode of activity is sort of passive, yet determined, unwavering, and even stubborn. Their strength is their consistency and loyalty. They follow things through to the end, managing and sustaining what has been started by the Cardinal signs. They may go to denial in times of change. They are very resistant to change, needing to take time to prep themselves. They tend to be late: Taurus is just slow; Scorpio uses tardiness as a subtle power struggle; Leo enjoys making an entrance; Aquarius wants things on their own terms. Late, but once there, they stay forever. The four Fixed signs are at the middle month of each season."
+      break;
+    case 'Mutable':
+      return "Mutable Signs are the most unstable and most open to influence by the environment. Their mode of activity is to make the transition from the old to the new, opening the way for the Cardinal Signs to begin a new cycle. They are infinitely flexible and tolerant. They find it naturally easy to let go. Whereas Cardinal signs begin new things, and Fixed signs sustain things, Mutable energy loosens structures and adapts it to new and changing conditions. With this territory comes mental worry. Mutable signs have many things going on in their heads rather than in tangible form. Many react by making lists. Some suffer from negative mental tension, involving fear, paranoia, and panic attacks. In anticipating negative outcomes, they really suffer during the worry process. But their high adaptability always sees them through. Gemini is changeable in its ideas; Virgo is dominated by its environment; Sagittarius has a continually changing view of life's possibilities; Pisces adapts itself superficially to its environment (like a chameleon) and reflects it like a mirror. Sometimes they compromise so much that they sacrifice their own interests. The four Mutable signs are at the final month of each season."
       break;
   }
 }
