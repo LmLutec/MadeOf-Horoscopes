@@ -25,7 +25,7 @@ function setUpHoroscopes (arr){
          
          if (signData.name.toLowerCase() == imgSrc.alt){  
 
-             let para = document.getElementById(`${imgSrc.alt}`)
+             let signId = document.getElementById(`${imgSrc.alt}`)
 
 
              let list = document.createElement('ul')
@@ -33,7 +33,7 @@ function setUpHoroscopes (arr){
              summary.innerText = signData.name
              list.appendChild(summary)
 
-             para.appendChild(list)
+             signId.appendChild(list)
 
              let dates = document.createElement('h4')
              dates.innerHTML = `${signData.start_date} - ${signData.end_date}`
@@ -55,6 +55,13 @@ function setUpHoroscopes (arr){
 
              let polarity = document.createElement('li')
              polarity.innerText = `Polarity: ${signData.polarity}`
+//creating house divider
+             let houseInfo = document.createElement('div')
+             houseInfo.className = "house"
+             let hdr = document.createElement('h3')
+             hdr.innerText = "What your house says about you"
+             houseInfo.appendChild(hdr)
+             signId.appendChild(houseInfo)
 
              list.appendChild(dates)
              list.appendChild(symbol)
@@ -79,7 +86,7 @@ function setUpHoroscopes (arr){
                 let sec = document.getElementById(`${lowerCaseName}`)
 
                 
-                para.appendChild(divider)
+                signId.appendChild(divider)
           
          }
      }
@@ -93,20 +100,52 @@ function setUpHoroscopes (arr){
 for (const img of s){
   img.addEventListener('click', function(){
   
-    let para = document.getElementById(`${img.alt}`)
+    let signId = document.getElementById(`${img.alt}`)
 
-    if (para.style.display === "" || para.style.display === "none"){
-      para.style.display = "inline-block"
+    if (signId.style.display === "" || signId.style.display === "none"){
+      signId.style.display = "inline-block"
     }
-    else if (para.style.display === "inline-block"){
-      para.style.display = "none"
+    else if (signId.style.display === "inline-block"){
+      signId.style.display = "none"
     }
   })
 } 
 
   
 
-
+// function houseInfo(sign){
+//   switch(sign.house) {
+//     case 1:
+//       The first house begins the zodiac, and covers the all “firsts”: 
+//       first impressions, the self and appearance, leadership, new initiatives, fresh starts and beginnings.
+//        The sign on the cusp, or starting edge, of this house, is referred to as your rising sign or ascendant.
+//       break;
+//     case 2:
+//       // code block
+//       break;
+//     case 3:
+//       // code block
+//       break;
+//     case 4:
+//       break;
+//     case 5:
+//       break;
+//     case 6:
+//       break;  
+//     case 7:
+//       break;
+//     case 8:
+//       break;
+//     case 9:
+//       break;
+//     case 10:
+//       break;
+//     case 11:
+//       break; 
+//     case 12:
+//       break;
+//   }
+// }
 
 
 
