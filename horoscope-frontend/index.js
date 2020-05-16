@@ -55,22 +55,6 @@ function setUpHoroscopes (arr){
 
              let polarity = document.createElement('li')
              polarity.innerText = `Polarity: ${signData.polarity}`
-//creating house divider
-             let houseInfo = document.createElement('div')
-             houseInfo.className = "house"
-             let hdr = document.createElement('h3')
-             hdr.innerText = "What your house says about you:"
-             let p = document.createElement('p')
-             p.innerText = getHouse(signData.house)
-             let caption = document.createElement('aside')
-             caption.innerText = "**The houses are WHERE these energies are most likely to manifest. The houses are the fields of experience, not the experience themselves.**"
-
-
-             hdr.appendChild(caption)
-             houseInfo.appendChild(hdr)
-             houseInfo.appendChild(p)
-             signId.appendChild(houseInfo)
-            
 
              list.appendChild(dates)
              list.appendChild(symbol)
@@ -80,6 +64,32 @@ function setUpHoroscopes (arr){
              list.appendChild(quality)
              list.appendChild(polarity)
 
+
+//creating house divider
+             let houseInfo = document.createElement('div')
+             houseInfo.className = "house"
+             let hdr = document.createElement('h4')
+             hdr.innerText = "The houses are WHERE these energies are most likely to manifest. The houses are the fields of experience, not the experience themselves..."
+             let p = document.createElement('p')
+             p.innerText = getHouse(signData.house)
+         
+             houseInfo.appendChild(hdr)
+             houseInfo.appendChild(p)
+             signId.appendChild(houseInfo)
+// creating element divider
+
+            let elementDiv = document.createElement('div')
+            let elementHdr = document.createElement('h4')
+            elementHdr.innerText = "The element of a zodiac sign reveals the basic temperament of the sign..."
+            let elementP = document.createElement('p')
+            elementP.innerText = getElement(signData.element)
+
+            signId.appendChild(elementDiv)
+            elementDiv.appendChild(elementHdr)
+            elementDiv.appendChild(elementP)
+            
+            
+//creating daily
              let dailies = signData.dailies
 
 
@@ -166,46 +176,19 @@ function getHouse(house){
 
 
 
-    //let signs = document.getElementsByClassName('signs')[0].children
-//    let signValues = Object.values(signs)
-      //console.log(signValues)
-
-      // for (const element of signs) {
-      //   console.log(element)
-      // }
-//    signValues.forEach(element => {
-        
-//    });
-        //working code
-
-
-
-
-
-           //if (x.style.display === "none"){
-        //}
-        // if (x.style.display === "block"){
-        //   x.style.display = "none"
-        // }
-        // else if (x.style.display === "none"){
-        //   x.style.display = "block"
-        // }
-        // else if (x.style.display === "block"){
-        //   x.style.display = "none"
-        // }
-        
-    
-
-      // for (const i of u){
-      //   i.style.display = "block"
-      //   console.log(i)
-      // }
-      //console.log(i.children)
-      //element.style.display = none;
-        // let d = document.createElement("dialog")
-        // d.open = true
-        // let p = document.createElement("p")
-        // document.body.appendChild(d)  
-        // d.appendChild(p)
-        // p.innerText = "true"
-  
+function getElement(element){
+  switch(element){
+    case 'Air':
+      return "Air signs approach energy mentally; they are thinkers. They are social, always ready for a new relationship or friendship. They love learning, but bore easily. Gemini has great intellectual curiosity, but too many personalities. Libra is partnership driven, but not in an emotional way. Aquarius is popular with friends and is unstoppable when it has a cause to champion. Air signs are into ideas and people. They are communicative; they must share information, interact with others, and influence society."
+      break;
+    case 'Fire':
+      return "Fire signs respond to energy very quickly. They favor action. They're ready to go, take a risk, start a business, go on a trip, etc. They are confident, idealistic, intense, and approach life with zest and enthusiasm. Here is energy to conquer, lead, and travel physically and mentally. Aries must act, Leo must lead grandly, and Sagittarius explores unknown places and ideas."
+      break;
+    case 'Earth':
+      return "Earth signs are more cautious in their approach. They are more practical, realistic, and they need solid footing before going forward. Taurus will dig the heels in and really ponder things. Virgo will analyze. Capricorn will climb, but will do it with care, first needing a vision, a plan, an organized structure before starting the ascent. Earth signs are dependable, thorough and solid. Earth signs seek to engage the physical world and master it through efficient organization. Earth signs seek economic security, respect, and prestige, and they work hard for it."
+      break; 
+    case 'Water':
+      return "Water signs respond to energy almost unconsciously. They are deeply emotional. Cancer is motivated to nurture and be nurtured. Scorpio has intense vision, never swaying, looking straight ahead with laser-like focus. Pisces is the trickiest to describe. Pisces energy is chameleon-like, absorbing its surroundings."
+      break;
+  }
+}
