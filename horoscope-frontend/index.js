@@ -64,6 +64,25 @@ function setUpHoroscopes (arr){
              list.appendChild(quality)
              list.appendChild(polarity)
 
+//creating daily
+            let dailies = signData.dailies
+
+
+            let currentDaily = dailies[dailies.length - 1]
+
+            
+            let divider = document.createElement('div')
+            // let dailyHdr = document.createElement('h4')
+            // dailyHdr.innerText = "Daily Horoscope"
+
+            divider.innerHTML = `${currentDaily.date} - ${currentDaily.text}`
+            divider.id = currentDaily.id
+            divider.className = "daily"
+            let lowerCaseName = signData.name.toLowerCase()
+            let sec = document.getElementById(`${lowerCaseName}`)
+
+            signId.appendChild(divider)
+            // divider.appendChild(dailyHdr)
 
 //creating house divider
              let houseInfo = document.createElement('div')
@@ -92,7 +111,7 @@ function setUpHoroscopes (arr){
 
             let qualityDiv = document.createElement('div')
             let qualityHdr = document.createElement('h4')
-            qualityDiv.innerText = "The qualities, also called 'modes', or 'modalities', indicate how people respond to stimuli, and especially how they act under tension..."
+            qualityHdr.innerText = "The qualities, also called 'modes', or 'modalities', indicate how people respond to stimuli, and especially how they act under tension..."
             let qualityP = document.createElement('p')
             qualityP.innerText = getQuality(signData.quality)
 
@@ -100,24 +119,17 @@ function setUpHoroscopes (arr){
             qualityDiv.appendChild(qualityHdr)
             qualityDiv.appendChild(qualityP)
 
-            
-//creating daily
-             let dailies = signData.dailies
+// polarities
 
+            let polarityDiv = document.createElement('div')
+            let polarityHdr = document.createElement('h4')
+            polarityHdr.innerText = "The thing about your Polarity is..."
+            let polarityP = document.createElement('p')
+            polarityP.innerText = "The two polarities are sometimes referred to as male/female, positive/negative, or yang/yin. Modern astrologers prefer to call the polarities active/receptive. This type of duality is the earliest form of classification. Yang energy is also known as 'masculine' energy. These are the Fire and Air signs. These signs are more active and assertive rather than receptive. Yin energy is also known as 'feminine' energy. These are the Earth and Water signs. These signs are more receptive and reactive rather than active. In general, signs of the same polarity can understand each other's personalities, whereas signs from opposing polarities have a difficult time seeing eye to eye. Air feeds Fire and empowers it; Earth needs Water for life. When talking about compatibility, Air and Fire signs (yang) go with each other, while Earth and Water signs (yin) go with each other."
 
-             let currentDaily = dailies[dailies.length - 1]
-            
-              
-                let divider = document.createElement('div')
-
-                divider.innerHTML = `${currentDaily.date} - ${currentDaily.text}`
-                divider.id = currentDaily.id
-                divider.className = "daily"
-                let lowerCaseName = signData.name.toLowerCase()
-                let sec = document.getElementById(`${lowerCaseName}`)
-
-                
-                signId.appendChild(divider)
+            signId.appendChild(polarityDiv)
+            polarityDiv.appendChild(polarityHdr)
+            polarityDiv.appendChild(polarityP)
           
          }
      }
