@@ -230,12 +230,3 @@ function getQuality(quality){
       break;
   }
 }
-
-
-
-// emailjs.sendForm('gmail', 'template_u0FEHv83', '#dearBoogie')
-//     .then(function(response) {
-//        console.log('SUCCESS!', response.status, response.text);
-//     }, function(error) {
-//        console.log('FAILED...', error);
-//     });
