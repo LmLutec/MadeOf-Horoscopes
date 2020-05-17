@@ -1,6 +1,5 @@
 const BASE_URL = "http://localhost:3000"
 const HOROSCOPES_URL = `${BASE_URL}/horoscopes`
-const todaysDate = new Date().toJSON().slice(0,10);
 
 
 
@@ -184,7 +183,7 @@ function getHouse(house){
       return "Simply put, the 8th house is the polar opposite of the 2nd house. Whereas the 2nd rules your own individual possessions, the 8th house rules what a relationship owns (joint finances). The 8th House is one of the most misunderstood Houses. This is probably because the things represented by the 8th House seem to have nothing in common with each other, or they seem to be negative. This House governs death, regeneration, taxes, inheritances, wills & legacies, sex (the actual act of sex), latent occult ability, joint resources, your partner’s money and possessions, spouse's money, bankruptcy, losses, personal sacrifices, alimony, clairvoyance. On a positive note, this House is about transformation and healing. But transformation and healing require some type of death, loss, or injury first. This House rules those processes and things by which we transform and become more powerful. Yes, this includes the act of sex."
       break;
     case '9th':
-      return "The ninth House refers to philosophy, religion, law, learning, higher education (as opposed to early education by the 3rd House), ethics, morals, long journeys, travel, foreign countries and interests, spiritual urges, dreams, visions, higher mind, ideas, understanding and wisdom, books, publishing, ceremonies, and rituals. This is the House of big thoughts and big ideas. 9th house 'understanding' is more complex than 3rd house 'knowledge'. The act of 'knowing' belongs to the 3rd house because it implies simply the direct contact of a person with something in his environment. Understanding involves the synthesis of known data. While the 3rd house refers to an individual's need to understand his close and personal environment, the 9th house is an area in which one seeks to discover the significance of larger fields of social existence which one may not experience directly but which his mind may explore through the use of analogy, generalization and abstraction. The 3rd and 9th houses symbolize the 2 polarities of the human mind, the concrete and the abstract. In summary, the 9th house includes experiences that we encounter when we search for the meaning of things. Whatever expands your field of activity or the scope of your mind – long journeys, contact with other cultures, great dreams, and even experiences with fortunetellers."
+      return "The ninth House refers to philosophy, religion, law, learning, higher education (as opposed to early education by the 3rd House), ethics, morals, long journeys, travel, foreign countries and interests, spiritual urges, dreams, visions, higher mind, ideas, understanding and wisdom, books, publishing, ceremonies, and rituals. This is the House of big thoughts and big ideas. 9th house 'understanding' is more complex than 3rd house 'knowledge'. The act of 'knowing' belongs to the 3rd house because it implies simply the direct contact of a person with something in his environment. Understanding involves the synthesis of known data. While the 3rd house refers to an individual's need to understand his close and personal environment, the 9th house is an area in which one seeks to discover the significance of larger fields of social existence which one may not experience directly but which his mind may explore through the use of analogy, generalization and abstraction. The 3rd and 9th houses symbolize the 2 polarities of the human mind, the concrete and the abstract. In summary, the 9th house includes experiences that we encounter when we search for the meaning of things. Whatever expands your field of activity or the scope of your mind, long journeys, contact with other cultures, great dreams, and even experiences with fortunetellers."
       break;
     case '10th':
       return "The tenth House is the House of status, honor, community power, prestige, reputation, and professional career. In our society, this includes financial success, but only as it relates to community power and prestige. It's not about gaining 'material stuff' as it is in the 2nd house. The 10th house wants success for the sake of honor and social status. This house includes social foundations (as opposed to personal home foundations in the 4th), recognition, personal achievements, social responsibilities, sense of duty, authority figures, politicians. This House encompasses the most public areas of one's life, and the career that you grow into, as opposed to daily work and odd jobs ruled by the 6th House. As with the 4th House, astrologers are divided over whether the 10th House rules one's mother or father. Those that say the 4th House rules the mother, say the 10th House rules the father, and vice versa. What is clear is that the 4th House rules the nurturing, home-body parent, while the 10th House rules the public, success-focused parent (the parent who 'wears the pants'). As with the other angular houses, any planets in this house are very important. Planets in the 10th house, the sign on the cusp of the 10th house, and its ruling planet will greatly influence your career and your general reputation in public."
@@ -231,3 +230,12 @@ function getQuality(quality){
       break;
   }
 }
+
+
+
+// emailjs.sendForm('gmail', 'template_u0FEHv83', '#dearBoogie')
+//     .then(function(response) {
+//        console.log('SUCCESS!', response.status, response.text);
+//     }, function(error) {
+//        console.log('FAILED...', error);
+//     });
