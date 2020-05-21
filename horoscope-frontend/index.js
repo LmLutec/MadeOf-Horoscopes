@@ -4,138 +4,35 @@ const HOROSCOPES_URL = `${BASE_URL}/horoscopes`
         
 //  document.addEventListener("DOMContentLoaded", function() {
 
-  fetch(HOROSCOPES_URL)
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(json){
-        
-         setUpHoroscopes(json)      
-     });
+fetch(HOROSCOPES_URL)
+  .then(function(response) {
+      return response.json();
+  })
+  .then(function(json){
+      setUpHoroscopes(json)      
+  });
 
 function setUpHoroscopes (arr){
   arr.forEach(signData => {
 
-     s = document.getElementsByClassName('sign')
+    s = document.getElementsByClassName('sign')
     
-     for (const imgSrc of s){
+    for (const imgSrc of s){
 
-         if (signData.name.toLowerCase() == imgSrc.alt){  
+        if (signData.name.toLowerCase() == imgSrc.alt){  
 
-             let signId = document.getElementById(`${imgSrc.alt}`)
+          let signId = document.getElementById(`${imgSrc.alt}`)
 
-
-             let list = document.createElement('ul')
-             let summary = document.createElement('summary')
-             summary.innerText = signData.name
-             list.appendChild(summary)
-//building list
-             signId.appendChild(list)
-
-             let dates = document.createElement('h4')
-             dates.innerHTML = `${signData.start_date} - ${signData.end_date}`
-
-             let symbol = document.createElement('li')
-             symbol.innerText =  `Symbol: ${signData.symbol}`
-
-             let house = document.createElement('li')
-             house.innerText = `House: ${signData.house}`
-
-             let planet = document.createElement('li')
-             planet.innerText = `Ruling planet: ${signData.planet}`
-
-             let element = document.createElement('li')
-             element.innerText = `Element: ${signData.element}`
-
-             let quality = document.createElement('li')
-             quality.innerText = `Quality: ${signData.quality}`
-
-             let polarity = document.createElement('li')
-             polarity.innerText = `Polarity: ${signData.polarity}`
-
-             list.appendChild(dates)
-             list.appendChild(symbol)
-             list.appendChild(house)
-             list.appendChild(planet)
-             list.appendChild(element)
-             list.appendChild(quality)
-             list.appendChild(polarity)
-
-//creating daily
-            let dailies = signData.dailies
-
-
-            let currentDaily = dailies[dailies.length - 1]
-
-            
-            let divider = document.createElement('div')
-            // let dailyHdr = document.createElement('h4')
-            // dailyHdr.innerText = "Daily Horoscope"
-
-            divider.innerHTML = `${currentDaily.date} - ${currentDaily.text}`
-            divider.id = currentDaily.id
-            divider.className = "daily"
-            let lowerCaseName = signData.name.toLowerCase()
-            let sec = document.getElementById(`${lowerCaseName}`)
-
-            signId.appendChild(divider)
-            // divider.appendChild(dailyHdr)
-
-//creating house divider
-             let houseInfo = document.createElement('div')
-             houseInfo.className = "house"
-             let hdr = document.createElement('h4')
-             hdr.innerText = "The houses are WHERE these energies are most likely to manifest. The houses are the fields of experience, not the experience themselves..."
-             let p = document.createElement('p')
-             p.innerText = getHouse(signData.house)
-         
-             houseInfo.appendChild(hdr)
-             houseInfo.appendChild(p)
-             signId.appendChild(houseInfo)
-// creating element divider
-
-            let elementDiv = document.createElement('div')
-            let elementHdr = document.createElement('h4')
-            elementHdr.innerText = "The element of a zodiac sign reveals the basic temperament of the sign..."
-            let elementP = document.createElement('p')
-            elementP.innerText = getElement(signData.element)
-
-            signId.appendChild(elementDiv)
-            elementDiv.appendChild(elementHdr)
-            elementDiv.appendChild(elementP)
-            
-// creating qualities
-
-            let qualityDiv = document.createElement('div')
-            let qualityHdr = document.createElement('h4')
-            qualityHdr.innerText = "The qualities, also called 'modes', or 'modalities', indicate how people respond to stimuli, and especially how they act under tension..."
-            let qualityP = document.createElement('p')
-            qualityP.innerText = getQuality(signData.quality)
-
-            signId.appendChild(qualityDiv)
-            qualityDiv.appendChild(qualityHdr)
-            qualityDiv.appendChild(qualityP)
-
-// polarities
-
-            let polarityDiv = document.createElement('div')
-            let polarityHdr = document.createElement('h4')
-            polarityHdr.innerText = "The thing about your Polarity is..."
-            let polarityP = document.createElement('p')
-            polarityP.innerText = "The two polarities are sometimes referred to as male/female, positive/negative, or yang/yin. Modern astrologers prefer to call the polarities active/receptive. This type of duality is the earliest form of classification. Yang energy is also known as 'masculine' energy. These are the Fire and Air signs. These signs are more active and assertive rather than receptive. Yin energy is also known as 'feminine' energy. These are the Earth and Water signs. These signs are more receptive and reactive rather than active. In general, signs of the same polarity can understand each other's personalities, whereas signs from opposing polarities have a difficult time seeing eye to eye. Air feeds Fire and empowers it; Earth needs Water for life. When talking about compatibility, Air and Fire signs (yang) go with each other, while Earth and Water signs (yin) go with each other."
-
-            signId.appendChild(polarityDiv)
-            polarityDiv.appendChild(polarityHdr)
-            polarityDiv.appendChild(polarityP)
+          buildAll(signData, signId)
           
-         }
-     }
+        }
+    }
     
    
-      })
-    }
+  })
+}
 // add event listener to img that shows/hides sign information
-  s = document.getElementsByClassName('sign')
+s = document.getElementsByClassName('sign')
 
 for (const img of s){
   img.addEventListener('click', function(){
@@ -151,7 +48,130 @@ for (const img of s){
   })
 } 
 
-  
+
+
+function buildAll (signData, signId){
+             createLists(signData, signId)
+             getDaily(signData, signId)
+             createHouse(signData, signId)
+             createElement(signData, signId)
+             createQuality(signData, signId)
+             createPolarity(signData, signId)
+}
+
+//building lists
+function createLists(signData, signId ){
+
+  let list = document.createElement('ul')
+  let summary = document.createElement('summary')
+  summary.innerText = signData.name
+  list.appendChild(summary)
+
+  signId.appendChild(list)
+
+  let dates = document.createElement('h4')
+  dates.innerHTML = `${signData.start_date} - ${signData.end_date}`
+
+  let symbol = document.createElement('li')
+  symbol.innerText =  `Symbol: ${signData.symbol}`
+
+  let house = document.createElement('li')
+  house.innerText = `House: ${signData.house}`
+
+  let planet = document.createElement('li')
+  planet.innerText = `Ruling planet: ${signData.planet}`
+
+  let element = document.createElement('li')
+  element.innerText = `Element: ${signData.element}`
+
+  let quality = document.createElement('li')
+  quality.innerText = `Quality: ${signData.quality}`
+
+  let polarity = document.createElement('li')
+  polarity.innerText = `Polarity: ${signData.polarity}`
+
+  list.appendChild(dates)
+  list.appendChild(symbol)
+  list.appendChild(house)
+  list.appendChild(planet)
+  list.appendChild(element)
+  list.appendChild(quality)
+  list.appendChild(polarity)
+}
+
+
+//creating daily
+function getDaily(signData, signId){
+  let dailies = signData.dailies
+
+  let currentDaily = dailies[dailies.length - 1]
+
+  let divider = document.createElement('div')
+
+  divider.innerHTML = `${currentDaily.date} - ${currentDaily.text}`
+  divider.id = currentDaily.id
+  divider.className = "daily"
+  let lowerCaseName = signData.name.toLowerCase()
+  let sec = document.getElementById(`${lowerCaseName}`)
+
+  signId.appendChild(divider)
+}
+
+
+//creating house
+function createHouse(signData, signId){
+  let houseInfo = document.createElement('div')
+  houseInfo.className = "house"
+  let hdr = document.createElement('h4')
+  hdr.innerText = "The houses are WHERE these energies are most likely to manifest. The houses are the fields of experience, not the experience themselves..."
+  let p = document.createElement('p')
+  p.innerText = getHouse(signData.house)
+
+  houseInfo.appendChild(hdr)
+  houseInfo.appendChild(p)
+  signId.appendChild(houseInfo)
+}
+
+// creating element
+function createElement(signData, signId){
+  let elementDiv = document.createElement('div')
+  let elementHdr = document.createElement('h4')
+  elementHdr.innerText = "The element of a zodiac sign reveals the basic temperament of the sign..."
+  let elementP = document.createElement('p')
+  elementP.innerText = getElement(signData.element)
+
+  signId.appendChild(elementDiv)
+  elementDiv.appendChild(elementHdr)
+  elementDiv.appendChild(elementP)
+}
+
+  // creating qualities
+function createQuality(signData, signId){
+  let qualityDiv = document.createElement('div')
+  let qualityHdr = document.createElement('h4')
+  qualityHdr.innerText = "The qualities, also called 'modes', or 'modalities', indicate how people respond to stimuli, and especially how they act under tension..."
+  let qualityP = document.createElement('p')
+  qualityP.innerText = getQuality(signData.quality)
+
+  signId.appendChild(qualityDiv)
+  qualityDiv.appendChild(qualityHdr)
+  qualityDiv.appendChild(qualityP)
+}
+
+
+// polarities
+function createPolarity(signData, signId){
+  let polarityDiv = document.createElement('div')
+  let polarityHdr = document.createElement('h4')
+  polarityHdr.innerText = "The thing about your Polarity is..."
+  let polarityP = document.createElement('p')
+  polarityP.innerText = "The two polarities are sometimes referred to as male/female, positive/negative, or yang/yin. Modern astrologers prefer to call the polarities active/receptive. This type of duality is the earliest form of classification. Yang energy is also known as 'masculine' energy. These are the Fire and Air signs. These signs are more active and assertive rather than receptive. Yin energy is also known as 'feminine' energy. These are the Earth and Water signs. These signs are more receptive and reactive rather than active. In general, signs of the same polarity can understand each other's personalities, whereas signs from opposing polarities have a difficult time seeing eye to eye. Air feeds Fire and empowers it; Earth needs Water for life. When talking about compatibility, Air and Fire signs (yang) go with each other, while Earth and Water signs (yin) go with each other."
+
+  signId.appendChild(polarityDiv)
+  polarityDiv.appendChild(polarityHdr)
+  polarityDiv.appendChild(polarityP)
+}
+
 
 function getHouse(house){
   
@@ -228,4 +248,4 @@ function getQuality(quality){
       break;
   }
 }
-// })
+
