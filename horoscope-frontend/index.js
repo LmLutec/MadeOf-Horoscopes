@@ -1,9 +1,10 @@
 const BASE_URL = "http://localhost:3000"
 const HOROSCOPES_URL = `${BASE_URL}/horoscopes`
 
+        
+//  document.addEventListener("DOMContentLoaded", function() {
 
-
-fetch(HOROSCOPES_URL)
+  fetch(HOROSCOPES_URL)
     .then(function(response) {
         return response.json();
     })
@@ -11,18 +12,14 @@ fetch(HOROSCOPES_URL)
         
          setUpHoroscopes(json)      
      });
-        
- 
 
 function setUpHoroscopes (arr){
   arr.forEach(signData => {
-    
 
      s = document.getElementsByClassName('sign')
     
      for (const imgSrc of s){
 
-         
          if (signData.name.toLowerCase() == imgSrc.alt){  
 
              let signId = document.getElementById(`${imgSrc.alt}`)
@@ -154,15 +151,6 @@ for (const img of s){
   })
 } 
 
-// add event listener to img that shows the img alt when hovered over
-// for (const img of s){
-//   img.addEventListener("mouseover", function(){
-//     let cap = document.createElement('p')
-//     cap.innerText = img.alt
-//     img.appendChild(cap)
-    // cap.style.display = "inline-block"
-//   })
-// }
   
 
 function getHouse(house){
@@ -240,4 +228,4 @@ function getQuality(quality){
       break;
   }
 }
-
+// })
