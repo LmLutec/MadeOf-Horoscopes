@@ -2,14 +2,21 @@ body{
     background-color: #003366;
 }
 
-img {
-    right: 150px;  
+img { 
+    /* right: 150px;    */
+    /* float: center; */
     padding: 10px;
     border-radius: 25px;
     opacity: 100%;
-    display: inline-block;
-  }
+    position: relative;
+    font-size: 20px;
+    /* display: inline-block; */
+   }
  
+img:hover {
+    opacity: 50%;
+}
+
 li {
     list-style: none;
 }
@@ -18,17 +25,19 @@ li {
 section {
     display: none;
     color: white;
+    text-align: center;
 }
 
 p {
     color: #80ffdf;
 }
 
-aside {
-    font-size: 16px;
-}
-
 form#dearBoogie {
-    vertical-align: middle;
+    text-align: center;
     color: white;
 }
+
+figcaption {
+    color: white;
+}
+

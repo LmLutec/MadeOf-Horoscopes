@@ -21,6 +21,7 @@ function setUpHoroscopes (arr){
      s = document.getElementsByClassName('sign')
     
      for (const imgSrc of s){
+
          
          if (signData.name.toLowerCase() == imgSrc.alt){  
 
@@ -136,7 +137,7 @@ function setUpHoroscopes (arr){
    
       })
     }
-
+// add event listener to img that shows/hides sign information
   s = document.getElementsByClassName('sign')
 
 for (const img of s){
@@ -153,6 +154,15 @@ for (const img of s){
   })
 } 
 
+// add event listener to img that shows the img alt when hovered over
+// for (const img of s){
+//   img.addEventListener("mouseover", function(){
+//     let cap = document.createElement('p')
+//     cap.innerText = img.alt
+//     img.appendChild(cap)
+    // cap.style.display = "inline-block"
+//   })
+// }
   
 
 function getHouse(house){
@@ -230,3 +240,4 @@ function getQuality(quality){
       break;
   }
 }
+
