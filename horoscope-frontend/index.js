@@ -99,8 +99,13 @@ function createLists(signData, signId ){
   list.appendChild(polarity)
 }
 
-
+// use object orientation for allowing users to upload daily?
+// get current date and only display dailies with the current date
 //creating daily
+
+let today = new Date();
+let date = (today.getMonth()+1)+'-' + today.getDate()+'-' + today.getFullYear();
+
 function getDaily(signData, signId){
   let dailies = signData.dailies
 
