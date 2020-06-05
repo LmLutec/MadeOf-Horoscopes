@@ -2,7 +2,7 @@ const BASE_URL = "http://localhost:3000"
 const HOROSCOPES_URL = `${BASE_URL}/horoscopes`
 
         
-//  document.addEventListener("DOMContentLoaded", function() {
+//  document.addEventListener("DOMContentLoaded", function() => {
 
 fetch(HOROSCOPES_URL)
   .then(function(response) {
@@ -52,7 +52,7 @@ for (const img of s){
 
 function buildAll (signData, signId){
              createLists(signData, signId)
-             getDaily(signData, signId)
+            //  getDaily(signData, signId)
              createHouse(signData, signId)
              createElement(signData, signId)
              createQuality(signData, signId)
@@ -106,21 +106,21 @@ function createLists(signData, signId ){
 let today = new Date();
 let date = (today.getMonth()+1)+'-' + today.getDate()+'-' + today.getFullYear();
 
-function getDaily(signData, signId){
-  let dailies = signData.dailies
+// function getDaily(signData, signId){
+//   let dailies = signData.dailies
 
-  let currentDaily = dailies[dailies.length - 1]
+//   let currentDaily = dailies[dailies.length - 1]
 
-  let divider = document.createElement('div')
+//   let divider = document.createElement('div')
 
-  divider.innerHTML = `${currentDaily.date} - ${currentDaily.text}`
-  divider.id = currentDaily.id
-  divider.className = "daily"
-  let lowerCaseName = signData.name.toLowerCase()
-  let sec = document.getElementById(`${lowerCaseName}`)
+//   divider.innerHTML = `${currentDaily.date} - ${currentDaily.text}`
+//   divider.id = currentDaily.id
+//   divider.className = "daily"
+//   let lowerCaseName = signData.name.toLowerCase()
+//   let sec = document.getElementById(`${lowerCaseName}`)
 
-  signId.appendChild(divider)
-}
+//   signId.appendChild(divider)
+// }
 
 
 //creating house

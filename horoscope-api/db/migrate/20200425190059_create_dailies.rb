@@ -3,6 +3,7 @@ class CreateDailies < ActiveRecord::Migration[6.0]
     create_table :dailies do |t|
       t.belongs_to :horoscope
       t.string :date
+      t.string :source
       t.text :text
 
       t.timestamps

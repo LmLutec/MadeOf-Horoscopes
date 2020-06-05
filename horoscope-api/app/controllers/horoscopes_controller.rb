@@ -7,7 +7,6 @@ class HoroscopesController < ApplicationController
     @@arr = []
 
     def index
-       daily_page
        
        horoscopes = Horoscope.all 
 
@@ -29,44 +28,44 @@ class HoroscopesController < ApplicationController
     end 
 
 
-    def daily_page
-        site = open("https://astrostyle.com/horoscopes/daily/")
-        doc = Nokogiri::HTML(site)
+    # def daily_page
+    #     site = open("https://astrostyle.com/horoscopes/daily/")
+    #     doc = Nokogiri::HTML(site)
 
-        doc.css('.my-horoscope-table-wrap').css('a').each do |i|
-            @@arr << i.attr('href')
-        end 
-        daily_readings
-    end 
+    #     doc.css('.my-horoscope-table-wrap').css('a').each do |i|
+    #         @@arr << i.attr('href')
+    #     end 
+    #     daily_readings
+    # end 
 
-    def daily_readings
-        @@arr.uniq!.each do |d|
-            site = open(d)
-            doc = Nokogiri::HTML(site)
-            reading = doc.css('.horoscope-content').css('p').text
+    # def daily_readings
+    #     @@arr.uniq!.each do |d|
+    #         site = open(d)
+    #         doc = Nokogiri::HTML(site)
+    #         reading = doc.css('.horoscope-content').css('p').text
         
-            if reading == "What's in the stars for you tomorrow? Read it now."
-                str = doc.css('.horoscope-content').css('div').text
-                new_str = str.slice(0..(str.index('Read the daily horoscope for another zodiac sign:')))
-                new_str = new_str.gsub(/\s+/, " ")
-                reading = new_str
-            end 
-            edited_text = reading.slice!("What's in the stars for you tomorrow? Read it now.") 
-            date = doc.css('.horoscope-content').css('h2').children[0].text.strip
-            sign = d.split("/").last.capitalize
-            find_horoscope = Horoscope.find_by(name: sign) 
+    #         if reading == "What's in the stars for you tomorrow? Read it now."
+    #             str = doc.css('.horoscope-content').css('div').text
+    #             new_str = str.slice(0..(str.index('Read the daily horoscope for another zodiac sign:')))
+    #             new_str = new_str.gsub(/\s+/, " ")
+    #             reading = new_str
+    #         end 
+    #         edited_text = reading.slice!("What's in the stars for you tomorrow? Read it now.") 
+    #         date = doc.css('.horoscope-content').css('h2').children[0].text.strip
+    #         sign = d.split("/").last.capitalize
+    #         find_horoscope = Horoscope.find_by(name: sign) 
             
-            if find_horoscope.dailies.length != 0 
-                find_horoscope.dailies.each do |daily|
-                    if !find_horoscope.dailies.exists?(date: date)
-                        find_horoscope.dailies << Daily.create(horoscope_id: find_horoscope.id, date: date, text: reading)
-                    end 
-                end 
-            else 
-                find_horoscope.dailies << Daily.create(horoscope_id: find_horoscope.id, date: date, text: reading)
-            end
-        end 
-    end 
+    #         if find_horoscope.dailies.length != 0 
+    #             find_horoscope.dailies.each do |daily|
+    #                 if !find_horoscope.dailies.exists?(date: date)
+    #                     find_horoscope.dailies << Daily.create(horoscope_id: find_horoscope.id, date: date, text: reading)
+    #                 end 
+    #             end 
+    #         else 
+    #             find_horoscope.dailies << Daily.create(horoscope_id: find_horoscope.id, date: date, text: reading)
+    #         end
+    #     end 
+    # end 
 end
 
 
