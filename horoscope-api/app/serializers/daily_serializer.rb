@@ -1,5 +1,5 @@
 class DailySerializer
   include FastJsonapi::ObjectSerializer
-  attributes :date, :text
+  attributes :date, :source, :text
   belongs_to :horoscope
 end

@@ -11,7 +11,7 @@ class DailiesController < ApplicationController
     end 
 
     def create
-        daily = Daily.new(date, text)
+        daily = Daily.new(date: params[:dateReceived], source: params[:sourceReceived], text: params[:readingReceived])
         daily.horoscope_id = params[:horoscope_id]
         daily.save 
     end 

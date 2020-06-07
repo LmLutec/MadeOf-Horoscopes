@@ -1,5 +1,6 @@
 const BASE_URL = "http://localhost:3000"
 const HOROSCOPES_URL = `${BASE_URL}/horoscopes`
+const DAILY_URL = `${BASE_URL}/dailies`
 
         
 //  document.addEventListener("DOMContentLoaded", function() => {
@@ -52,17 +53,18 @@ for (const img of s){
 
 function buildAll (signData, signId){
              createLists(signData, signId)
-            //  getDaily(signData, signId)
              createHouse(signData, signId)
              createElement(signData, signId)
              createQuality(signData, signId)
              createPolarity(signData, signId)
+             getDaily(signData, signId)
 }
 
 //building lists
 function createLists(signData, signId ){
 
-  let list = document.createElement('ul')
+  let list = document.createElement('div')
+
   let summary = document.createElement('summary')
   summary.innerText = signData.name
   list.appendChild(summary)
@@ -106,27 +108,140 @@ function createLists(signData, signId ){
 let today = new Date();
 let date = (today.getMonth()+1)+'-' + today.getDate()+'-' + today.getFullYear();
 
-// function getDaily(signData, signId){
-//   let dailies = signData.dailies
+function getDaily(signData, signId){
+  
+ 
+  // let currentDaily = dailies[dailies.length - 1]
 
-//   let currentDaily = dailies[dailies.length - 1]
 
-//   let divider = document.createElement('div')
+  let divider = document.createElement('div')
+  let divHdr = document.createElement('h5')
+  divHdr.innerText = "Daily Readings for Today"
+  let infoList = document.createElement('ul')
+  
 
-//   divider.innerHTML = `${currentDaily.date} - ${currentDaily.text}`
-//   divider.id = currentDaily.id
-//   divider.className = "daily"
-//   let lowerCaseName = signData.name.toLowerCase()
-//   let sec = document.getElementById(`${lowerCaseName}`)
+  let dailies = signData.dailies
+  
+  if (dailies.length > 0){
+    for (const daily of dailies){
+      let info = document.createElement('li')
+      info.innerText = `Date: ${daily.date} \n` + `Source: ${daily.source}\n` + `Reading: ${daily.text}`
+    }
+  }
+  
 
-//   signId.appendChild(divider)
-// }
+  // divider.innerHTML = `${currentDaily.date} - ${currentDaily.text}`
+  // divider.id = currentDaily.id
+  divider.className = "daily"
+  
+
+  let dailyButton = document.createElement('button')
+  dailyButton.innerText = "Add Daily"
+  dailyButton.className = 'addDaily'
+
+  let form = createForm(signData)
+
+  signId.appendChild(divider)
+  divider.appendChild(divHdr)
+  divHdr.appendChild(infoList)
+  infoList.appendChild(info)
+  divider.appendChild(dailyButton)
+  divider.appendChild(form)
+
+  dailyButton.addEventListener('click', function(){
+    if (form.style.display === 'none' || form.style.display === ""){
+      form.style.display = "block"
+    }
+    else if (form.style.display === 'block'){
+      form.style.display = 'none'
+    }
+  })
+
+
+  form.onsubmit = function sendInfo (){
+    
+    let dateReceived = form.elements[0].value
+    let sourceReceived = form.elements[1].value
+    let readingReceived = form.elements[2].value
+    let horoscope_id = form.id 
+
+    let formData = {
+      dateReceived: dateReceived,
+      sourceReceived: sourceReceived,
+      readingReceived: readingReceived,
+      horoscope_id: horoscope_id
+    };
+
+    let options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(formData)
+    }
+
+    fetch(DAILY_URL, options);
+
+
+  }
+
+}
+
+
+
+
+function createForm(signData){
+  let form = document.createElement('form')
+  form.id = signData.id
+  form.className = "dailyForm" 
+
+  let lineBreak = document.createElement('br')
+  let lineBreak2 = document.createElement('br')
+  let lineBreak3 = document.createElement('br')
+
+  let dateInput = document.createElement('input')
+  dateInput.setAttribute('type', 'date')
+  dateInput.setAttribute('value', date) 
+  
+
+  let sourceInput = document.createElement('input')
+  sourceInput.setAttribute('type', 'text')
+  sourceInput.setAttribute('value', 'Source')
+
+
+  let readingInput = document.createElement('input')
+  readingInput.setAttribute('id', 'readingInput')
+  readingInput.setAttribute('type', 'text-area')
+  readingInput.setAttribute('value', 'Reading')
+
+  let submit = document.createElement('button')
+  submit.id = "submit"
+  submit.innerText = "Submit"
+  submit.setAttribute('type', 'submit')
+  submit.setAttribute('value', 'Submit')
+
+  form.appendChild(dateInput)
+  form.appendChild(lineBreak)
+  form.appendChild(sourceInput)
+  form.appendChild(lineBreak2)
+  form.appendChild(readingInput)
+  form.appendChild(lineBreak3)
+  form.appendChild(submit)
+
+  return form 
+}
+
+
 
 
 //creating house
 function createHouse(signData, signId){
+  let lowerCaseName = signData.name.toLowerCase()
+  let sec = document.getElementById(`${lowerCaseName}`)
   let houseInfo = document.createElement('div')
-  houseInfo.className = "house"
+
+
   let hdr = document.createElement('h4')
   hdr.innerText = "The houses are WHERE these energies are most likely to manifest. The houses are the fields of experience, not the experience themselves..."
   let p = document.createElement('p')
