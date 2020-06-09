@@ -57,7 +57,7 @@ function buildAll (signData, signId){
              createElement(signData, signId)
              createQuality(signData, signId)
              createPolarity(signData, signId)
-             getDaily(signData, signId)
+             addDaily(signData, signId)
 }
 
 //building lists
@@ -106,34 +106,22 @@ function createLists(signData, signId ){
 //creating daily
 
 let today = new Date();
-let date = (today.getMonth()+1)+'-' + today.getDate()+'-' + today.getFullYear();
+let date = (today.getFullYear()+ '-' + (today.getMonth()+1) + '-' + today.getDate());
 
-function getDaily(signData, signId){
+function addDaily(signData, signId){
   
- 
-  // let currentDaily = dailies[dailies.length - 1]
-
-
   let divider = document.createElement('div')
   let divHdr = document.createElement('h5')
   divHdr.innerText = "Daily Readings for Today"
-  let infoList = document.createElement('ul')
-  
-
-  let dailies = signData.dailies
-  
-  if (dailies.length > 0){
-    for (const daily of dailies){
-      let info = document.createElement('li')
-      info.innerText = `Date: ${daily.date} \n` + `Source: ${daily.source}\n` + `Reading: ${daily.text}`
-    }
-  }
-  
-
-  // divider.innerHTML = `${currentDaily.date} - ${currentDaily.text}`
-  // divider.id = currentDaily.id
   divider.className = "daily"
-  
+  let hdr = document.createElement('h4')
+  hdr.innerText = `Date: ${date}`
+  let infoList = document.createElement('ul')
+
+  signId.appendChild(divider)
+  divider.appendChild(divHdr)
+  divHdr.appendChild(infoList)
+  infoList.appendChild(hdr)
 
   let dailyButton = document.createElement('button')
   dailyButton.innerText = "Add Daily"
@@ -141,10 +129,6 @@ function getDaily(signData, signId){
 
   let form = createForm(signData)
 
-  signId.appendChild(divider)
-  divider.appendChild(divHdr)
-  divHdr.appendChild(infoList)
-  infoList.appendChild(info)
   divider.appendChild(dailyButton)
   divider.appendChild(form)
 
@@ -157,7 +141,7 @@ function getDaily(signData, signId){
     }
   })
 
-
+   
   form.onsubmit = function sendInfo (){
     
     let dateReceived = form.elements[0].value
@@ -186,7 +170,27 @@ function getDaily(signData, signId){
 
   }
 
+  let dailies = signData.dailies
+
+  if (dailies.length > 0){ 
+
+    for (const daily of dailies){
+      let d = daily.date.split("-")
+
+      if (today.getFullYear() == d[0] && (today.getMonth()+1) == d[1] && today.getDate() == d[2]){
+        let info = document.createElement('li')
+        
+        info.innerText =  `Source: ${daily.source}\n` + `Reading: ${daily.text}`
+        infoList.appendChild(info)
+     }
+    
+    }
+  }
+
 }
+
+
+
 
 
 

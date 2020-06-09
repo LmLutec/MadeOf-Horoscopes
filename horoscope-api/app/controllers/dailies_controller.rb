@@ -2,7 +2,7 @@ class DailiesController < ApplicationController
 
 
     def index
-        dailies = Daily.all 
+        dailies = Daily.all.sort_by { |d| d.date }
 
         options = {
             include: [:horoscope]

@@ -64,6 +64,17 @@ button#submit {
 form.dailyForm {
     display: none;
 }
-/* input#readingInput {
-    width: 100%
-} */
+
+div.daily li{
+  background-color: #4d4dff;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.daily {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
