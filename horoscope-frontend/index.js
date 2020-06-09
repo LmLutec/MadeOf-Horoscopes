@@ -115,7 +115,7 @@ function addDaily(signData, signId){
   divHdr.innerText = "Daily Readings for Today"
   divider.className = "daily"
   let hdr = document.createElement('h4')
-  hdr.innerText = `Date: ${date}`
+  hdr.innerText = `Today's Date: ${date}`
   let infoList = document.createElement('ul')
 
   signId.appendChild(divider)
@@ -178,12 +178,37 @@ function addDaily(signData, signId){
       let d = daily.date.split("-")
 
       if (today.getFullYear() == d[0] && (today.getMonth()+1) == d[1] && today.getDate() == d[2]){
-        let info = document.createElement('li')
-        
-        info.innerText =  `Source: ${daily.source}\n` + `Reading: ${daily.text}`
+        let info = document.createElement('li')        
+        info.innerText =  `Source: ${daily.source}\n` + `Reading: ${daily.text}\n` 
+        info.id = `daily/${daily.id}`
+
+        let img = document.createElement('img')
+        img.src = "images/x.png"
+        img.className = "x"
+
+        info.appendChild(img)
         infoList.appendChild(info)
+
+        removeReading(img, daily)
      }
-    
+     else {
+       let dailyHdr = document.createElement('h4')
+       dailyHdr.innerText = daily.date 
+       let info = document.createElement('li')
+       info.innerText =  `Source: ${daily.source}\n` + `Reading: ${daily.text}\n` 
+       info.id = `daily/${daily.id}`
+
+       let img = document.createElement('img')
+       img.src = "images/x.png"
+       img.className = "x"
+
+       info.appendChild(img)
+       infoList.appendChild(dailyHdr)
+       infoList.appendChild(info)
+      
+      removeReading(img, daily, dailyHdr)
+
+     }
     }
   }
 
@@ -191,7 +216,13 @@ function addDaily(signData, signId){
 
 
 
-
+function removeReading (img, daily, dailyHdr){
+  img.addEventListener('click', function(){
+   let rd = document.getElementById(`daily/${daily.id}`)
+    rd.remove()
+    console.log(dailyHdr.childNodes.count)
+  })
+}
 
 
 

@@ -66,9 +66,10 @@ form.dailyForm {
 }
 
 div.daily li{
-  background-color: #4d4dff;
+  /* background-color: #4d4dff; */
   overflow: auto;
   white-space: nowrap;
+  padding: 10px;
 }
 
 div.daily {
@@ -77,4 +78,8 @@ div.daily {
   text-align: center;
   padding: 14px;
   text-decoration: none;
+}
+
+img.x {
+    display: inline-block;
 }
