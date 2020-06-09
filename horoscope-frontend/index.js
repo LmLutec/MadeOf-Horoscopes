@@ -117,6 +117,11 @@ function addDaily(signData, signId){
   let hdr = document.createElement('h4')
   hdr.innerText = `Today's Date: ${date}`
   let infoList = document.createElement('ul')
+  let viewBtn = document.createElement('button')
+  viewBtn.className = "viewOtherDailies"
+  viewBtn.innerText = "View other dates"      //need to create a function that creates an event listener for this button. Once pressed, 
+                                              // user should get dailies for that horoscope (need to set up horoscope/show route). Create a hidden
+                                              // div that will show this info.
 
   signId.appendChild(divider)
   divider.appendChild(divHdr)
@@ -126,10 +131,14 @@ function addDaily(signData, signId){
   let dailyButton = document.createElement('button')
   dailyButton.innerText = "Add Daily"
   dailyButton.className = 'addDaily'
+  let brk = document.createElement('br')
 
   let form = createForm(signData)
 
+  
   divider.appendChild(dailyButton)
+  divider.appendChild(brk)
+  divider.appendChild(viewBtn)
   divider.appendChild(form)
 
   dailyButton.addEventListener('click', function(){
@@ -143,7 +152,7 @@ function addDaily(signData, signId){
 
    
   form.onsubmit = function sendInfo (){
-    
+
     let dateReceived = form.elements[0].value
     let sourceReceived = form.elements[1].value
     let readingReceived = form.elements[2].value
@@ -172,10 +181,15 @@ function addDaily(signData, signId){
 
   let dailies = signData.dailies
 
+  let obj = {}
+
   if (dailies.length > 0){ 
 
     for (const daily of dailies){
       let d = daily.date.split("-")
+
+      // obj[`:${daily.date}`] = [`${daily.source}`, `${daily.text}`]
+      // console.log(obj)
 
       if (today.getFullYear() == d[0] && (today.getMonth()+1) == d[1] && today.getDate() == d[2]){
         let info = document.createElement('li')        
@@ -191,36 +205,36 @@ function addDaily(signData, signId){
 
         removeReading(img, daily)
      }
-     else {
-       let dailyHdr = document.createElement('h4')
-       dailyHdr.innerText = daily.date 
-       let info = document.createElement('li')
-       info.innerText =  `Source: ${daily.source}\n` + `Reading: ${daily.text}\n` 
-       info.id = `daily/${daily.id}`
+    //  else {
+    
 
-       let img = document.createElement('img')
-       img.src = "images/x.png"
-       img.className = "x"
+      //  let dailyHdr = document.createElement('h4')
+      //  dailyHdr.innerText = daily.date 
+      //  let info = document.createElement('li')
+      //  info.innerText =  `Source: ${daily.source}\n` + `Reading: ${daily.text}\n` 
+      //  info.id = `daily/${daily.id}`
 
-       info.appendChild(img)
-       infoList.appendChild(dailyHdr)
-       infoList.appendChild(info)
+      //  let img = document.createElement('img')
+      //  img.src = "images/x.png"
+      //  img.className = "x"
+
+      //  info.appendChild(img)
+      //  infoList.appendChild(dailyHdr)
+      //  infoList.appendChild(info)
       
-      removeReading(img, daily, dailyHdr)
+      // removeReading(img, daily)
 
-     }
+    //  }
     }
   }
 
 }
 
 
-
-function removeReading (img, daily, dailyHdr){
+function removeReading (img, daily){
   img.addEventListener('click', function(){
    let rd = document.getElementById(`daily/${daily.id}`)
     rd.remove()
-    console.log(dailyHdr.childNodes.count)
   })
 }
 
