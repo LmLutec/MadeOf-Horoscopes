@@ -1,20 +1,10 @@
-require 'nokogiri'
-require 'open-uri'
-
-
 class HoroscopesController < ApplicationController
 
     @@arr = []
 
     def index
-       
        horoscopes = Horoscope.all 
-
-       options = {
-           include: [:dailies] 
-       }
-       render json: horoscopes, include: [:dailies]
-       ##HoroscopeSerializer.new(horoscopes, options)
+       render json: HoroscopeSerializer.new(horoscopes).to_serialized_json
     end 
     
     def create
@@ -23,49 +13,10 @@ class HoroscopesController < ApplicationController
 
     def show
         horoscope = Horoscope.find(params[:id])
-        render json: horoscope, include: [:dailies] 
-        ##HoroscopeSerializer.new(horoscope)
+        render json: HoroscopeSerializer.new(horoscope).to_serialized_json
     end 
 
 
-    # def daily_page
-    #     site = open("https://astrostyle.com/horoscopes/daily/")
-    #     doc = Nokogiri::HTML(site)
-
-    #     doc.css('.my-horoscope-table-wrap').css('a').each do |i|
-    #         @@arr << i.attr('href')
-    #     end 
-    #     daily_readings
-    # end 
-
-    # def daily_readings
-    #     @@arr.uniq!.each do |d|
-    #         site = open(d)
-    #         doc = Nokogiri::HTML(site)
-    #         reading = doc.css('.horoscope-content').css('p').text
-        
-    #         if reading == "What's in the stars for you tomorrow? Read it now."
-    #             str = doc.css('.horoscope-content').css('div').text
-    #             new_str = str.slice(0..(str.index('Read the daily horoscope for another zodiac sign:')))
-    #             new_str = new_str.gsub(/\s+/, " ")
-    #             reading = new_str
-    #         end 
-    #         edited_text = reading.slice!("What's in the stars for you tomorrow? Read it now.") 
-    #         date = doc.css('.horoscope-content').css('h2').children[0].text.strip
-    #         sign = d.split("/").last.capitalize
-    #         find_horoscope = Horoscope.find_by(name: sign) 
-            
-    #         if find_horoscope.dailies.length != 0 
-    #             find_horoscope.dailies.each do |daily|
-    #                 if !find_horoscope.dailies.exists?(date: date)
-    #                     find_horoscope.dailies << Daily.create(horoscope_id: find_horoscope.id, date: date, text: reading)
-    #                 end 
-    #             end 
-    #         else 
-    #             find_horoscope.dailies << Daily.create(horoscope_id: find_horoscope.id, date: date, text: reading)
-    #         end
-    #     end 
-    # end 
 end
 
 

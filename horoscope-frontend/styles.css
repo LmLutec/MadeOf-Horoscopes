@@ -83,3 +83,7 @@ div.daily {
 img.x {
     display: inline-block;
 }
+
+div#prevDailies {
+    display: none;
+}

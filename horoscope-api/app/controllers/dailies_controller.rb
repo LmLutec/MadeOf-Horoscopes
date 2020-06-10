@@ -3,11 +3,7 @@ class DailiesController < ApplicationController
 
     def index
         dailies = Daily.all.sort_by { |d| d.date }
-
-        options = {
-            include: [:horoscope]
-        }
-        render json: DailySerializer.new(dailies,options)
+        render json: DailySerializer.new(dailies).to_serialized_json
     end 
 
     def create

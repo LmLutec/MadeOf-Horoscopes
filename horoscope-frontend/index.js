@@ -4,6 +4,9 @@ const DAILY_URL = `${BASE_URL}/dailies`
 
         
 //  document.addEventListener("DOMContentLoaded", function() => {
+let today = new Date();
+let date = (today.getFullYear()+ '-' + (today.getMonth()+1) + '-' + today.getDate());
+
 
 fetch(HOROSCOPES_URL)
   .then(function(response) {
@@ -25,7 +28,6 @@ function setUpHoroscopes (arr){
           let signId = document.getElementById(`${imgSrc.alt}`)
 
           buildAll(signData, signId)
-          
         }
     }
     
@@ -33,21 +35,7 @@ function setUpHoroscopes (arr){
   })
 }
 // add event listener to img that shows/hides sign information
-s = document.getElementsByClassName('sign')
 
-for (const img of s){
-  img.addEventListener('click', function(){
-  
-    let signId = document.getElementById(`${img.alt}`)
-
-    if (signId.style.display === "" || signId.style.display === "none"){
-      signId.style.display = "inline-block"
-    }
-    else if (signId.style.display === "inline-block"){
-      signId.style.display = "none"
-    }
-  })
-} 
 
 
 
@@ -59,6 +47,30 @@ function buildAll (signData, signId){
              createPolarity(signData, signId)
              addDaily(signData, signId)
 }
+
+
+
+
+
+  let s = document.getElementsByClassName('sign')
+
+  for (const img of s){
+    img.addEventListener('click', function(){
+    
+      let signId = document.getElementById(`${img.alt}`)
+
+      if (signId.style.display === "" || signId.style.display === "none"){
+        signId.style.display = "inline-block"
+      }
+      else if (signId.style.display === "inline-block"){
+        signId.style.display = "none"
+      }
+    })
+  } 
+
+
+
+
 
 //building lists
 function createLists(signData, signId ){
@@ -105,8 +117,6 @@ function createLists(signData, signId ){
 // get current date and only display dailies with the current date
 //creating daily
 
-let today = new Date();
-let date = (today.getFullYear()+ '-' + (today.getMonth()+1) + '-' + today.getDate());
 
 function addDaily(signData, signId){
   
@@ -141,6 +151,36 @@ function addDaily(signData, signId){
   divider.appendChild(viewBtn)
   divider.appendChild(form)
 
+  let moreDailiesDiv = document.createElement('div')
+  moreDailiesDiv.id = "prevDailies"
+  let dailyList = document.createElement('ul')
+  divider.appendChild(moreDailiesDiv)
+  moreDailiesDiv.appendChild(dailyList)
+  
+
+  fetch(`${HOROSCOPES_URL}/${signData.id}`)
+      .then(res => res.json())
+        .then(function(json){
+          json.dailies.forEach(daily => {
+            let ind = document.createElement('li')
+            ind.innerText = `${daily.date}\n` + `Source: ${daily.source}\n` + `Reading: ${daily.text}`
+            dailyList.appendChild(ind)
+          })
+        })
+
+  
+
+
+  viewBtn.addEventListener("click", function(){
+    if (moreDailiesDiv.style.display == "" || moreDailiesDiv.style.display == "none"){
+      moreDailiesDiv.style.display = "block"
+    }
+    else if (moreDailiesDiv.style.display == "block"){
+      moreDailiesDiv.style.display = "none"
+    }
+
+  })
+
   dailyButton.addEventListener('click', function(){
     if (form.style.display === 'none' || form.style.display === ""){
       form.style.display = "block"
@@ -150,13 +190,9 @@ function addDaily(signData, signId){
     }
   })
 
-   
-  form.onsubmit = function sendInfo (){
-    event.preventDefault()
-  
+  form.onsubmit = function sendInfo (){  
 
-
-    let dateReceived = `${date}`                     //form.elements[0].value
+    let dateReceived = `${date}`                     
     let sourceReceived = form.elements[0].value
     let readingReceived = form.elements[1].value
     let horoscope_id = form.id 
@@ -178,38 +214,43 @@ function addDaily(signData, signId){
     }
 
     fetch(DAILY_URL, options);
-
+    postDaily(signData)
 
   }
+}
 
-  let dailies = signData.dailies
 
-  let obj = {}
+  function postDaily (signData){
+    let dailies = signData.dailies
+  
+    if (dailies.length > 0){ 
+  
+      for (const daily of dailies){
+        let d = daily.date.split("-")
+  
+        // obj[`:${daily.date}`] = [`${daily.source}`, `${daily.text}`]
+        // console.log(obj)
+  
+        // display all dailies by date
+  
+        if (today.getFullYear() == d[0] && (today.getMonth()+1) == d[1] && today.getDate() == d[2]){
+          let info = document.createElement('li')        
+          info.innerText =  `Source: ${daily.source}\n` + `Reading: ${daily.text}\n` 
+          info.id = `daily/${daily.id}`
+  
+          let img = document.createElement('img')
+          img.src = "images/x.png"
+          img.className = "x"
+  
+          info.appendChild(img)
+          infoList.appendChild(info)
+  
+          removeReading(img, daily)
+       }
+      }
+    }
+  }
 
-  if (dailies.length > 0){ 
-
-    for (const daily of dailies){
-      let d = daily.date.split("-")
-
-      // obj[`:${daily.date}`] = [`${daily.source}`, `${daily.text}`]
-      // console.log(obj)
-
-      // display all dailies by date
-
-      if (today.getFullYear() == d[0] && (today.getMonth()+1) == d[1] && today.getDate() == d[2]){
-        let info = document.createElement('li')        
-        info.innerText =  `Source: ${daily.source}\n` + `Reading: ${daily.text}\n` 
-        info.id = `daily/${daily.id}`
-
-        let img = document.createElement('img')
-        img.src = "images/x.png"
-        img.className = "x"
-
-        info.appendChild(img)
-        infoList.appendChild(info)
-
-        removeReading(img, daily)
-     }
     //  else {
     
 
@@ -230,10 +271,18 @@ function addDaily(signData, signId){
       // removeReading(img, daily)
 
     //  }
-    }
-  }
+  
 
-}
+
+
+  //  viewBtn.addEventListener("click", function(){
+  //    let id = signData.id 
+      
+  //  })
+   
+
+  
+
 
 
 function removeReading (img, daily){
