@@ -112,7 +112,7 @@ function addDaily(signData, signId){
   
   let divider = document.createElement('div')
   let divHdr = document.createElement('h5')
-  divHdr.innerText = "Daily Readings for Today"
+  divHdr.innerText = "Daily Readings"
   divider.className = "daily"
   let hdr = document.createElement('h4')
   hdr.innerText = `Today's Date: ${date}`
@@ -152,10 +152,13 @@ function addDaily(signData, signId){
 
    
   form.onsubmit = function sendInfo (){
+    event.preventDefault()
+  
+
 
     let dateReceived = `${date}`                     //form.elements[0].value
-    let sourceReceived = form.elements[1].value
-    let readingReceived = form.elements[2].value
+    let sourceReceived = form.elements[0].value
+    let readingReceived = form.elements[1].value
     let horoscope_id = form.id 
 
     let formData = {
