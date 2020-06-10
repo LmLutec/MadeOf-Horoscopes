@@ -121,7 +121,7 @@ function addDaily(signData, signId){
   viewBtn.className = "viewOtherDailies"
   viewBtn.innerText = "View other dates"      //need to create a function that creates an event listener for this button. Once pressed, 
                                               // user should get dailies for that horoscope (need to set up horoscope/show route). Create a hidden
-                                              // div that will show this info.
+                                              // div that will show this info. 
 
   signId.appendChild(divider)
   divider.appendChild(divHdr)
@@ -153,7 +153,7 @@ function addDaily(signData, signId){
    
   form.onsubmit = function sendInfo (){
 
-    let dateReceived = form.elements[0].value
+    let dateReceived = `${date}`                     //form.elements[0].value
     let sourceReceived = form.elements[1].value
     let readingReceived = form.elements[2].value
     let horoscope_id = form.id 
@@ -190,6 +190,8 @@ function addDaily(signData, signId){
 
       // obj[`:${daily.date}`] = [`${daily.source}`, `${daily.text}`]
       // console.log(obj)
+
+      // display all dailies by date
 
       if (today.getFullYear() == d[0] && (today.getMonth()+1) == d[1] && today.getDate() == d[2]){
         let info = document.createElement('li')        
@@ -249,9 +251,10 @@ function createForm(signData){
   let lineBreak2 = document.createElement('br')
   let lineBreak3 = document.createElement('br')
 
-  let dateInput = document.createElement('input')
-  dateInput.setAttribute('type', 'date')
-  dateInput.setAttribute('value', date) 
+  // let dateInput = document.createElement('input')
+  // dateInput.setAttribute('type', 'date')
+  // dateInput.setAttribute('value', `${date}`) 
+
   
 
   let sourceInput = document.createElement('input')
@@ -270,7 +273,7 @@ function createForm(signData){
   submit.setAttribute('type', 'submit')
   submit.setAttribute('value', 'Submit')
 
-  form.appendChild(dateInput)
+  // form.appendChild(dateInput)
   form.appendChild(lineBreak)
   form.appendChild(sourceInput)
   form.appendChild(lineBreak2)
