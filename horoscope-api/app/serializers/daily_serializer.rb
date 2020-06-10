@@ -1,7 +1,7 @@
 class DailySerializer
   include FastJsonapi::ObjectSerializer
   belongs_to :horoscope
-  attributes :date, :source, :text
+  attributes :date, :source, :text, :daily_id
 
   def initialize(daily)
     @daily = daily

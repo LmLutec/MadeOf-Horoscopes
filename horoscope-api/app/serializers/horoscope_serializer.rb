@@ -9,7 +9,7 @@ class HoroscopeSerializer
  
   def to_serialized_json
     @horoscope.to_json(:include => {
-      :dailies => {:only => [:date, :source, :text]},
+      :dailies => {:only => [:id, :date, :source, :text]},
   },
        :except => [:updated_at])
   end

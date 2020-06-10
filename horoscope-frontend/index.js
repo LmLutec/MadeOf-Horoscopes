@@ -157,6 +157,30 @@ function addDaily(signData, signId){
   divider.appendChild(moreDailiesDiv)
   moreDailiesDiv.appendChild(dailyList)
   
+    let dailies = signData.dailies
+  
+    if (dailies.length > 0){ 
+  
+      for (const daily of dailies){
+        let d = daily.date.split("-")
+        if (today.getFullYear() == d[0] && (today.getMonth()+1) == d[1] && today.getDate() == d[2]){
+          let info = document.createElement('li')        
+          info.innerText =  `Source: ${daily.source}\n` + `Reading: ${daily.text}\n` 
+          info.id = `daily/${daily.id}`
+  
+          let img = document.createElement('img')
+          img.src = "images/x.png"
+          img.className = "x"
+  
+          info.appendChild(img)
+          infoList.appendChild(info)
+          removeReading(img, `${daily.id}`)
+       }
+      }
+    }
+  
+
+
 
   fetch(`${HOROSCOPES_URL}/${signData.id}`)
       .then(res => res.json())
@@ -220,36 +244,6 @@ function addDaily(signData, signId){
 }
 
 
-  function postDaily (signData){
-    let dailies = signData.dailies
-  
-    if (dailies.length > 0){ 
-  
-      for (const daily of dailies){
-        let d = daily.date.split("-")
-  
-        // obj[`:${daily.date}`] = [`${daily.source}`, `${daily.text}`]
-        // console.log(obj)
-  
-        // display all dailies by date
-  
-        if (today.getFullYear() == d[0] && (today.getMonth()+1) == d[1] && today.getDate() == d[2]){
-          let info = document.createElement('li')        
-          info.innerText =  `Source: ${daily.source}\n` + `Reading: ${daily.text}\n` 
-          info.id = `daily/${daily.id}`
-  
-          let img = document.createElement('img')
-          img.src = "images/x.png"
-          img.className = "x"
-  
-          info.appendChild(img)
-          infoList.appendChild(info)
-  
-          removeReading(img, daily)
-       }
-      }
-    }
-  }
 
     //  else {
     
@@ -285,10 +279,10 @@ function addDaily(signData, signId){
 
 
 
-function removeReading (img, daily){
+function removeReading (img, id){
   img.addEventListener('click', function(){
-   let rd = document.getElementById(`daily/${daily.id}`)
-    rd.remove()
+   let rd = document.getElementById(`daily/${id}`)
+     rd.remove()
   })
 }
 
