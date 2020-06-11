@@ -65,6 +65,7 @@ form.dailyForm {
     display: none;
 }
 
+
 div.daily li{
   /* background-color: #4d4dff; */
   overflow: auto;
@@ -87,3 +88,9 @@ img.x {
 div#prevDailies {
     display: none;
 }
+/* 
+div#prevDailies li{
+    overflow: auto;
+  white-space: nowrap;
+  padding: 10px;
+} */

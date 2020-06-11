@@ -4,6 +4,8 @@ const DAILY_URL = `${BASE_URL}/dailies`
 
         
 //  document.addEventListener("DOMContentLoaded", function() => {
+  window.addEventListener( "load", function () {
+
 let today = new Date();
 let date = (today.getFullYear()+ '-' + (today.getMonth()+1) + '-' + today.getDate());
 
@@ -168,20 +170,14 @@ function addDaily(signData, signId){
           info.innerText =  `Source: ${daily.source}\n` + `Reading: ${daily.text}\n` 
           info.id = `daily/${daily.id}`
   
-          let img = document.createElement('img')
-          img.src = "images/x.png"
-          img.className = "x"
-  
-          info.appendChild(img)
           infoList.appendChild(info)
-          removeReading(img, `${daily.id}`)
        }
       }
     }
   
 
 
-
+// use this fetch to display past daily dates with text, compare date with current date
   fetch(`${HOROSCOPES_URL}/${signData.id}`)
       .then(res => res.json())
         .then(function(json){
@@ -189,10 +185,26 @@ function addDaily(signData, signId){
             let ind = document.createElement('li')
             ind.innerText = `${daily.date}\n` + `Source: ${daily.source}\n` + `Reading: ${daily.text}`
             dailyList.appendChild(ind)
+
+// console.log(daily.date)
+            //  runDown.dates.push(`${daily.date}`)
+              // .push(`${daily.source} + ${daily.text}`)
+            
+            // else {
+            //   console.log(daily.date)
+            // }
+
+            // console.log(runDown.dates)
+        
+
           })
+
+         
+
+
         })
 
-  
+        
 
 
   viewBtn.addEventListener("click", function(){
@@ -208,16 +220,19 @@ function addDaily(signData, signId){
   dailyButton.addEventListener('click', function(){
     if (form.style.display === 'none' || form.style.display === ""){
       form.style.display = "block"
+      dailyButton.innerText = "Close Daily form"
     }
     else if (form.style.display === 'block'){
       form.style.display = 'none'
+      dailyButton.innerText = "Add Daily"
     }
   })
 
-  form.onsubmit = function sendInfo (){  
+  form.onsubmit = function sendInfo (){  // add code so that data is added to the dom and values are cleared after submission
+    event.preventDefault()
 
     let dateReceived = `${date}`                     
-    let sourceReceived = form.elements[0].value
+    let sourceReceived = form.elements[0].value //use sourceReceived and readingReceived, appendchild to moreDailiesDiv
     let readingReceived = form.elements[1].value
     let horoscope_id = form.id 
 
@@ -238,10 +253,16 @@ function addDaily(signData, signId){
     }
 
     fetch(DAILY_URL, options);
-    postDaily(signData)
 
+    let ind = document.createElement('li')
+            ind.innerText = `Source: ${sourceReceived}\n` + `Reading: ${readingReceived}`
+            infoList.appendChild(ind)
+
+    form.reset()
   }
 }
+
+
 
 
 
@@ -305,13 +326,15 @@ function createForm(signData){
 
   let sourceInput = document.createElement('input')
   sourceInput.setAttribute('type', 'text')
-  sourceInput.setAttribute('value', 'Source')
+  sourceInput.setAttribute('placeholder', 'Source')
 
 
-  let readingInput = document.createElement('input')
-  readingInput.setAttribute('id', 'readingInput')
-  readingInput.setAttribute('type', 'text-area')
-  readingInput.setAttribute('value', 'Reading')
+
+  let readingInput = document.createElement('textarea')
+  readingInput.placeholder = "Reading"
+  readingInput.rows = "10"
+  readingInput.cols ="50"
+  
 
   let submit = document.createElement('button')
   submit.id = "submit"
@@ -466,4 +489,4 @@ function getQuality(quality){
       break;
   }
 }
-
+  })
