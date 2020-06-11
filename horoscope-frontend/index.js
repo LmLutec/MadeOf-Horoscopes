@@ -119,10 +119,8 @@ function addDaily(signData, signId){
   
   let divider = document.createElement('div')
   let divHdr = document.createElement('h4')
-  divHdr.innerText = "Daily Readings"
+  divHdr.innerText = `Daily Readings for ${date}`
   divider.className = "daily"
-  let hdr = document.createElement('h4')
-  hdr.innerText = `Today's Date: ${date}`
   let infoList = document.createElement('ul')
   let viewBtn = document.createElement('button')
   viewBtn.className = "viewOtherDailies"
@@ -133,7 +131,7 @@ function addDaily(signData, signId){
   signId.appendChild(divider)
   divider.appendChild(divHdr)
   divHdr.appendChild(infoList)
-  infoList.appendChild(hdr)
+
 
   let dailyButton = document.createElement('button')
   dailyButton.innerText = "Add Daily Reading"
