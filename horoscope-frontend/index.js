@@ -36,9 +36,6 @@ function setUpHoroscopes (arr){
    
   })
 }
-// add event listener to img that shows/hides sign information
-
-
 
 
 function buildAll (signData, signId){
@@ -50,7 +47,7 @@ function buildAll (signData, signId){
              addDaily(signData, signId)
 }
 
-
+// add event listener to img that shows/hides sign information
 
 
 
@@ -115,15 +112,13 @@ function createLists(signData, signId ){
   list.appendChild(polarity)
 }
 
-// use object orientation for allowing users to upload daily?
-// get current date and only display dailies with the current date
 //creating daily
 
 
 function addDaily(signData, signId){
   
   let divider = document.createElement('div')
-  let divHdr = document.createElement('h5')
+  let divHdr = document.createElement('h4')
   divHdr.innerText = "Daily Readings"
   divider.className = "daily"
   let hdr = document.createElement('h4')
@@ -131,7 +126,7 @@ function addDaily(signData, signId){
   let infoList = document.createElement('ul')
   let viewBtn = document.createElement('button')
   viewBtn.className = "viewOtherDailies"
-  viewBtn.innerText = "View other dates"      //need to create a function that creates an event listener for this button. Once pressed, 
+  viewBtn.innerText = "View previous daily readings"      //need to create a function that creates an event listener for this button. Once pressed, 
                                               // user should get dailies for that horoscope (need to set up horoscope/show route). Create a hidden
                                               // div that will show this info. 
 
@@ -141,7 +136,7 @@ function addDaily(signData, signId){
   infoList.appendChild(hdr)
 
   let dailyButton = document.createElement('button')
-  dailyButton.innerText = "Add Daily"
+  dailyButton.innerText = "Add Daily Reading"
   dailyButton.className = 'addDaily'
   let brk = document.createElement('br')
 
@@ -161,7 +156,7 @@ function addDaily(signData, signId){
   
     let dailies = signData.dailies
   
-    if (dailies.length > 0){ 
+    if (dailies.length > 0){  //shows current/Today's list
   
       for (const daily of dailies){
         let d = daily.date.split("-")
@@ -177,14 +172,18 @@ function addDaily(signData, signId){
   
 
 
-// use this fetch to display past daily dates with text, compare date with current date
+// use this fetch to display past daily dates with text, compare date with current date. TEST TMW TO SEE IF LINE 181.
   fetch(`${HOROSCOPES_URL}/${signData.id}`)
       .then(res => res.json())
         .then(function(json){
           json.dailies.forEach(daily => {
-            let ind = document.createElement('li')
-            ind.innerText = `${daily.date}\n` + `Source: ${daily.source}\n` + `Reading: ${daily.text}`
-            dailyList.appendChild(ind)
+            let dailyDate = daily.date.split("-")
+            if (today.getFullYear() != dailyDate[0] && (today.getMonth()+1) != dailyDate[1] && today.getDate() != dailyDate[2]){
+              let ind = document.createElement('li')
+              ind.innerText = `${daily.date}\n` + `Source: ${daily.source}\n` + `Reading: ${daily.text}`
+              dailyList.appendChild(ind)
+            }
+           
 
 // console.log(daily.date)
             //  runDown.dates.push(`${daily.date}`)
@@ -209,10 +208,12 @@ function addDaily(signData, signId){
 
   viewBtn.addEventListener("click", function(){
     if (moreDailiesDiv.style.display == "" || moreDailiesDiv.style.display == "none"){
-      moreDailiesDiv.style.display = "block"
+      moreDailiesDiv.style.display = "inline-block"
+      viewBtn.innerText = "Close previous daily readings"
     }
-    else if (moreDailiesDiv.style.display == "block"){
+    else if (moreDailiesDiv.style.display == "inline-block"){
       moreDailiesDiv.style.display = "none"
+      viewBtn.innerText = "View previous daily readings"
     }
 
   })
@@ -224,7 +225,7 @@ function addDaily(signData, signId){
     }
     else if (form.style.display === 'block'){
       form.style.display = 'none'
-      dailyButton.innerText = "Add Daily"
+      dailyButton.innerText = "Add Daily Reading"
     }
   })
 
@@ -254,11 +255,15 @@ function addDaily(signData, signId){
 
     fetch(DAILY_URL, options);
 
-    let ind = document.createElement('li')
-            ind.innerText = `Source: ${sourceReceived}\n` + `Reading: ${readingReceived}`
-            infoList.appendChild(ind)
+    let brkdwnDate = dateReceived.split("-")
+
+    if (today.getFullYear() == brkdwnDate[0] && (today.getMonth()+1) == brkdwnDate[1] && today.getDate() == brkdwnDate[2]){
+          let ind = document.createElement('li')
+          ind.innerText = `Source: ${sourceReceived}\n` + `Reading: ${readingReceived}`
+          infoList.appendChild(ind)
 
     form.reset()
+    }
   }
 }
 
@@ -316,13 +321,7 @@ function createForm(signData){
 
   let lineBreak = document.createElement('br')
   let lineBreak2 = document.createElement('br')
-  let lineBreak3 = document.createElement('br')
-
-  // let dateInput = document.createElement('input')
-  // dateInput.setAttribute('type', 'date')
-  // dateInput.setAttribute('value', `${date}`) 
-
-  
+  let lineBreak3 = document.createElement('br')  
 
   let sourceInput = document.createElement('input')
   sourceInput.setAttribute('type', 'text')
@@ -342,7 +341,6 @@ function createForm(signData){
   submit.setAttribute('type', 'submit')
   submit.setAttribute('value', 'Submit')
 
-  // form.appendChild(dateInput)
   form.appendChild(lineBreak)
   form.appendChild(sourceInput)
   form.appendChild(lineBreak2)
