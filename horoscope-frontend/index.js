@@ -123,9 +123,7 @@ function addDaily(signData, signId){
   let infoList = document.createElement('ul')
   let viewBtn = document.createElement('button')
   viewBtn.className = "viewOtherDailies"
-  viewBtn.innerText = "View previous daily readings"      //need to create a function that creates an event listener for this button. Once pressed, 
-                                              // user should get dailies for that horoscope (need to set up horoscope/show route). Create a hidden
-                                              // div that will show this info. 
+  viewBtn.innerText = "View previous daily readings"     
 
   signId.appendChild(divider)
   divider.appendChild(divHdr)
@@ -161,52 +159,39 @@ function addDaily(signData, signId){
           let info = document.createElement('li')        
           info.innerText =  `Source: ${daily.source}\n` + `Reading: ${daily.text}\n` 
           info.id = `daily/${daily.id}`
-  
           infoList.appendChild(info)
-       }
+        }
+
+        else if (date != daily.date){
+          let chkVlu = document.getElementById(`${daily.date}/${daily.horoscope_id}`)
+        
+          if (chkVlu == null){
+            let dateHdr = document.createElement('h4')
+            dateHdr.innerText = daily.date
+            let dateContainer = document.createElement('ul')
+            dateContainer.id = `${daily.date}/${daily.horoscope_id}`
+            let dailyInfo = document.createElement('li')
+            
+            dailyInfo.innerText = `Source: ${daily.source}\n` + `Reading: ${daily.text}\n`
+
+            dailyList.appendChild(dateHdr)
+            dateHdr.appendChild(dateContainer)
+            dateContainer.appendChild(dailyInfo)
+          }
+      
+
+          else if (chkVlu){
+
+            let dailyInfo = document.createElement('li')
+            dailyInfo.innerText = `Source: ${daily.source}\n` + `Reading: ${daily.text}\n`
+            
+            chkVlu.appendChild(dailyInfo)
+            
+          }
+
+        }
       }
     }
-  
-
-
-// use this fetch to display past daily dates with text, compare date with current date. TEST TMW TO SEE IF LINE 181.
-  fetch(`${HOROSCOPES_URL}/${signData.id}`)
-      .then(res => res.json())
-        .then(function(json){
-          json.dailies.forEach(daily => {
-            let dailyDate = daily.date.split("-")
-            if (date != daily.date){
-              let ind = document.createElement('li')
-              ind.innerText = `${daily.date}\n` + `Source: ${daily.source}\n` + `Reading: ${daily.text}`
-              dailyList.appendChild(ind)
-            }
-         
-
-            // if (today.getFullYear() != dailyDate[0] && (today.getMonth()+1) != dailyDate[1] && today.getDate() != dailyDate[2]){
-            //   let ind = document.createElement('li')
-            //   ind.innerText = `${daily.date}\n` + `Source: ${daily.source}\n` + `Reading: ${daily.text}`
-            //   dailyList.appendChild(ind)
-            // }
-           
-
-// console.log(daily.date)
-            //  runDown.dates.push(`${daily.date}`)
-              // .push(`${daily.source} + ${daily.text}`)
-            
-            // else {
-            //   console.log(daily.date)
-            // }
-
-            // console.log(runDown.dates)
-        
-
-          })
-
-         
-
-
-        })
-
         
 
 
@@ -233,11 +218,11 @@ function addDaily(signData, signId){
     }
   })
 
-  form.onsubmit = function sendInfo (){  // add code so that data is added to the dom and values are cleared after submission
+  form.onsubmit = function sendInfo (){ 
     event.preventDefault()
 
     let dateReceived = `${date}`                     
-    let sourceReceived = form.elements[0].value //use sourceReceived and readingReceived, appendchild to moreDailiesDiv
+    let sourceReceived = form.elements[0].value 
     let readingReceived = form.elements[1].value
     let horoscope_id = form.id 
 
@@ -270,44 +255,7 @@ function addDaily(signData, signId){
     }
   }
 }
-
-
-
-
-
-    //  else {
-    
-
-      //  let dailyHdr = document.createElement('h4')
-      //  dailyHdr.innerText = daily.date 
-      //  let info = document.createElement('li')
-      //  info.innerText =  `Source: ${daily.source}\n` + `Reading: ${daily.text}\n` 
-      //  info.id = `daily/${daily.id}`
-
-      //  let img = document.createElement('img')
-      //  img.src = "images/x.png"
-      //  img.className = "x"
-
-      //  info.appendChild(img)
-      //  infoList.appendChild(dailyHdr)
-      //  infoList.appendChild(info)
-      
-      // removeReading(img, daily)
-
-    //  }
-  
-
-
-
-  //  viewBtn.addEventListener("click", function(){
-  //    let id = signData.id 
-      
-  //  })
    
-
-  
-
-
 
 function removeReading (img, id){
   img.addEventListener('click', function(){

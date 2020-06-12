@@ -2,7 +2,7 @@ class DailiesController < ApplicationController
 
 
     def index
-        dailies = Daily.all.sort_by { |d| d.date }
+        dailies = Daily.all
         render json: DailySerializer.new(dailies).to_serialized_json
     end 
 
