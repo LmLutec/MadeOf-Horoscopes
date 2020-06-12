@@ -3,8 +3,7 @@ const HOROSCOPES_URL = `${BASE_URL}/horoscopes`
 const DAILY_URL = `${BASE_URL}/dailies`
 
         
-//  document.addEventListener("DOMContentLoaded", function() => {
-  window.addEventListener( "load", function () {
+window.addEventListener( "load", function () {
 
 let today = new Date();
 let date = (today.getFullYear()+ '-' + (today.getMonth()+1) + '-' + today.getDate());
@@ -176,11 +175,18 @@ function addDaily(signData, signId){
         .then(function(json){
           json.dailies.forEach(daily => {
             let dailyDate = daily.date.split("-")
-            if (today.getFullYear() != dailyDate[0] && (today.getMonth()+1) != dailyDate[1] && today.getDate() != dailyDate[2]){
+            if (date != daily.date){
               let ind = document.createElement('li')
               ind.innerText = `${daily.date}\n` + `Source: ${daily.source}\n` + `Reading: ${daily.text}`
               dailyList.appendChild(ind)
             }
+         
+
+            // if (today.getFullYear() != dailyDate[0] && (today.getMonth()+1) != dailyDate[1] && today.getDate() != dailyDate[2]){
+            //   let ind = document.createElement('li')
+            //   ind.innerText = `${daily.date}\n` + `Source: ${daily.source}\n` + `Reading: ${daily.text}`
+            //   dailyList.appendChild(ind)
+            // }
            
 
 // console.log(daily.date)
