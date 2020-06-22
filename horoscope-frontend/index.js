@@ -5,6 +5,25 @@ const DAILY_URL = `${BASE_URL}/dailies`
         
 window.addEventListener( "load", function () {
 
+  class Sign {
+    constructor(signId, signAttributes) {
+      this.signId = signId;
+      this.name = signAttributes.name;
+      this.startDate = signAttributes.start_date;
+      this.endDate = signAttributes.end_date;
+      this.symbol = signAttributes.symbol;
+      this.house = signAttributes.house;
+      this.planet = signAttributes.planet;
+      this.element = signAttributes.element;
+      this.quality = signAttributes.quality;
+      this.polarity = signAttributes.polarity;
+      
+      buildAll(signAttributes, signId)
+    }
+  
+    
+  }
+
 let today = new Date();
 let date = (today.getFullYear()+ '-' + (today.getMonth()+1) + '-' + today.getDate());
 
@@ -28,7 +47,8 @@ function setUpHoroscopes (arr){
 
           let signId = document.getElementById(`${imgSrc.alt}`)
 
-          buildAll(signData, signId)
+          new Sign(signId, signData)
+
         }
     }
     
@@ -257,15 +277,6 @@ function addDaily(signData, signId){
 }
    
 
-function removeReading (img, id){
-  img.addEventListener('click', function(){
-   let rd = document.getElementById(`daily/${id}`)
-     rd.remove()
-  })
-}
-
-
-
 function createForm(signData){
   let form = document.createElement('form')
   form.id = signData.id
@@ -439,4 +450,22 @@ function getQuality(quality){
       break;
   }
 }
-  })
+
+
+
+})
+
+
+
+
+
+
+
+
+  
+  // function removeReading (img, id){
+  //   img.addEventListener('click', function(){
+  //    let rd = document.getElementById(`daily/${id}`)
+  //      rd.remove()
+  //   })
+  // }

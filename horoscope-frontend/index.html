@@ -14,8 +14,9 @@
             window.onload = function() {
                 document.getElementById('dearBoogie').addEventListener('submit', function(event) {
                     event.preventDefault();
-                
                     emailjs.sendForm('gmail', 'advice_template', this);
+                    this.reset()
+                    alert("Message sent")
                 });
             }
         </script>
@@ -26,7 +27,7 @@
             <h3 style= "color:white">Made Of</h3>
 
             <div class = "signs">
-                      
+
                 <img src = "images/Aries.png" alt = "aries" class = "sign">
                 <section id = 'aries'>
                     <ul></ul>
@@ -86,6 +87,8 @@
                 <section id ='pisces'>
                     <ul></ul>
                 </section>
+
+                
             </div>
 
 
