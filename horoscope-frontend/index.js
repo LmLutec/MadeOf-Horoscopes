@@ -17,10 +17,53 @@ window.addEventListener( "load", function () {
       this.element = signAttributes.element;
       this.quality = signAttributes.quality;
       this.polarity = signAttributes.polarity;
-      
+
       buildAll(signAttributes, signId)
     }
+
+
+    createLists(){
+      
+      let list = document.createElement('div')
+    
+      let summary = document.createElement('summary')
+      summary.innerText = this.name
+      list.appendChild(summary)
+
+    
+      this.signId.prepend(list)
+    
+      let dates = document.createElement('h4')
+      dates.innerHTML = `${this.startDate} - ${this.endDate}`
+    
+      let symbol = document.createElement('li')
+      symbol.innerText =  `Symbol: ${this.symbol}`
+    
+      let house = document.createElement('li')
+      house.innerText = `House: ${this.house}`
+    
+      let planet = document.createElement('li')
+      planet.innerText = `Ruling planet: ${this.planet}`
+    
+      let element = document.createElement('li')
+      element.innerText = `Element: ${this.element}`
+    
+      let quality = document.createElement('li')
+      quality.innerText = `Quality: ${this.quality}`
+    
+      let polarity = document.createElement('li')
+      polarity.innerText = `Polarity: ${this.polarity}`
+    
+      list.appendChild(dates)
+      list.appendChild(symbol)
+      list.appendChild(house)
+      list.appendChild(planet)
+      list.appendChild(element)
+      list.appendChild(quality)
+      list.appendChild(polarity)
+    }
   
+    
     
   }
 
@@ -47,8 +90,8 @@ function setUpHoroscopes (arr){
 
           let signId = document.getElementById(`${imgSrc.alt}`)
 
-          new Sign(signId, signData)
-
+          let sign = new Sign(signId, signData)
+          sign.createLists()
         }
     }
     
@@ -58,7 +101,6 @@ function setUpHoroscopes (arr){
 
 
 function buildAll (signData, signId){
-             createLists(signData, signId)
              createHouse(signData, signId)
              createElement(signData, signId)
              createQuality(signData, signId)
@@ -90,46 +132,45 @@ function buildAll (signData, signId){
 
 
 
-//building lists
-function createLists(signData, signId ){
+// building lists
+// function createLists(signData, signId){
+//   let list = document.createElement('div')
 
-  let list = document.createElement('div')
+//   let summary = document.createElement('summary')
+//   summary.innerText = signData.name
+//   list.appendChild(summary)
 
-  let summary = document.createElement('summary')
-  summary.innerText = signData.name
-  list.appendChild(summary)
+//   signId.appendChild(list)
 
-  signId.appendChild(list)
+//   let dates = document.createElement('h4')
+//   dates.innerHTML = `${signData.start_date} - ${signData.end_date}`
 
-  let dates = document.createElement('h4')
-  dates.innerHTML = `${signData.start_date} - ${signData.end_date}`
+//   let symbol = document.createElement('li')
+//   symbol.innerText =  `Symbol: ${signData.symbol}`
 
-  let symbol = document.createElement('li')
-  symbol.innerText =  `Symbol: ${signData.symbol}`
+//   let house = document.createElement('li')
+//   house.innerText = `House: ${signData.house}`
 
-  let house = document.createElement('li')
-  house.innerText = `House: ${signData.house}`
+//   let planet = document.createElement('li')
+//   planet.innerText = `Ruling planet: ${signData.planet}`
 
-  let planet = document.createElement('li')
-  planet.innerText = `Ruling planet: ${signData.planet}`
+//   let element = document.createElement('li')
+//   element.innerText = `Element: ${signData.element}`
 
-  let element = document.createElement('li')
-  element.innerText = `Element: ${signData.element}`
+//   let quality = document.createElement('li')
+//   quality.innerText = `Quality: ${signData.quality}`
 
-  let quality = document.createElement('li')
-  quality.innerText = `Quality: ${signData.quality}`
+//   let polarity = document.createElement('li')
+//   polarity.innerText = `Polarity: ${signData.polarity}`
 
-  let polarity = document.createElement('li')
-  polarity.innerText = `Polarity: ${signData.polarity}`
-
-  list.appendChild(dates)
-  list.appendChild(symbol)
-  list.appendChild(house)
-  list.appendChild(planet)
-  list.appendChild(element)
-  list.appendChild(quality)
-  list.appendChild(polarity)
-}
+//   list.appendChild(dates)
+//   list.appendChild(symbol)
+//   list.appendChild(house)
+//   list.appendChild(planet)
+//   list.appendChild(element)
+//   list.appendChild(quality)
+//   list.appendChild(polarity)
+// }
 
 //creating daily
 
