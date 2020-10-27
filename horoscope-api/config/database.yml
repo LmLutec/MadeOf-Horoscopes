@@ -5,7 +5,7 @@ default: &default
 
 development:
   <<: *default
-  database: db/madeof_database_development
+  database: madeof_database_development
   username: lauren
   password: 
 
@@ -20,6 +20,6 @@ test:
 
 production:
   <<: *default
-  database: db/madeof_database_development
+  database: madeof_database_development
 
 
