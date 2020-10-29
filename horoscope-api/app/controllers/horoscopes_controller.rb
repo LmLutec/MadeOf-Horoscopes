@@ -3,7 +3,6 @@ class HoroscopesController < ApplicationController
     @@arr = []
 
     def index
-       rake db:seed 
        horoscopes = Horoscope.all 
        render json: HoroscopeSerializer.new(horoscopes).to_serialized_json
     end 
