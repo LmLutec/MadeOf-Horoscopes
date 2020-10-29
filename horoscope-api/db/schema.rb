@@ -12,8 +12,11 @@
 
 ActiveRecord::Schema.define(version: 2020_04_25_190059) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "dailies", force: :cascade do |t|
-    t.integer "horoscope_id"
+    t.bigint "horoscope_id"
     t.string "date"
     t.string "source"
     t.text "text"
